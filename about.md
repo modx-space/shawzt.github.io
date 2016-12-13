@@ -1,5 +1,6 @@
 ---
 layout: default
+title: "About"
 ---
 
 ![魔都-上海](/assets/images/shanghai.png)

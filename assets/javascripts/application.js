@@ -2,7 +2,7 @@
 
 // Initialize fluidbox
 
-$(function () {
+(function () {
   $('.fluidbox-trigger').fluidbox();
 })
 
