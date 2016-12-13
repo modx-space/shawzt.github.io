@@ -1,0 +1,33 @@
+<nav class="header-nav reveal">
+  <a href="{{ '/' | relative_url }}" class="header-logo" title="{{ site.name }}">{{ site.name }}</a>
+  <ul class="header-links">
+    {% if site.social.twitter %}
+      <li>
+        <a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" title="Twitter">
+          <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+        </a>
+      </li>
+    {% endif %}
+    {% if site.social.github %}
+      <li>
+        <a href="https://github.com/{{ site.social.github }}" target="_blank" title="GitHub">
+          <i class="fa fa-github-square fa-lg" aria-hidden="true"></i>
+        </a>
+      </li>
+    {% endif %}
+    {% if site.social.linkedin %}
+      <li>
+        <a href="https://www.linkedin.com/in/{{ site.social.linkedin }}" target="_blank" title="LinkedIn">
+          <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+        </a>
+      </li>
+    {% endif %}
+    {% if site.rss_enabled == true %}
+      <li>
+        <a href="{{ 'feed.xml' | relative_url }}" target="_blank" title="RSS">
+          <i class="fa fa-rss-square fa-lg" aria-hidden="true"></i>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>

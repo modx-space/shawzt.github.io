@@ -1,0 +1,45 @@
+# Settings
+name: Learning & Sharing
+# site url
+url: https://shawzt.github.io/
+# light Or dark
+blog_theme: light
+publish_date: 2016
+
+paginate: 5
+paginate_path: "/posts/page/:num/"
+
+blog_tool: https://jekyllrb.com/
+blog_style: https://github.com/nielsenramon/chalk/
+blog_host: https://pages.github.com/
+
+discus_identifier: shawztblog
+ga_analytics: UA-47043610-1
+rss_enabled: true
+social:
+  github: shawzt
+  linkedin: shawzt
+  twitter: shawzt
+
+collections:
+  my_tags:
+    output: true
+    permalink: /tag/:slug/
+defaults:
+  -
+    scope:
+      path: ""
+      type: my_tags
+    values:
+      layout: articles_by_tag
+
+permalink: posts/:slug
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+markdown: kramdown
+exclude:
+  - Gemfile
+  - Gemfile.lock
