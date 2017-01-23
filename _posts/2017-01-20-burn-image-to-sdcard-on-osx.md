@@ -14,15 +14,15 @@ tags: [工具]
   1. **下载Ubuntu系统**
   2. **转换iso文件为dmg文件**    
       *hdiutil convert -format UDRW -o /path/to/dmg /path/to/ubuntu.iso*    
-      -o 第一个参数为转换后的dmg文件路径(无需后缀)；第二个参数为下载的Ubuntu系统iso文件
+      `-o 第一个参数为转换后的dmg文件路径(无需后缀)；第二个参数为下载的Ubuntu系统iso文件`
   3. **查看U盘标识**    
-      *diskutil lis*    
+      *diskutil list*    
       注意挂载的U盘标识，如/dev/disk1
   4. **卸载U盘**    
       *diskutil unmountDisk /dev/disk1*
   5. **写入文件**    
       *sudo dd if=/path/to/ubuntu.dmg of=/dev/disk1 bs=1m*    
-      if的值为转换后的dmg文件全路径，of的值为需要写入的U盘标识，参考第3步的结果
+      `if的值为转换后的dmg文件全路径，of的值为需要写入的U盘标识，参考第3步的结果`
   6. **完成**    
       系统弹出提示无法读取U盘的信息框，点击“弹出”--制作成功
 
