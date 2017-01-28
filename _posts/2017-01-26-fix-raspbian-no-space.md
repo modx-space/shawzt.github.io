@@ -1,7 +1,7 @@
 ---
 layout: post
-title: How To Fix Raspbian "No Space Left" issue
-description: Expand Raspbian Filesystem  
+title: How To Fix Raspbian "No Space Left" Issue
+description: Expand Raspbian Filesystem
 modified: 2017-01-26
 tags: [Raspberry]
 ---

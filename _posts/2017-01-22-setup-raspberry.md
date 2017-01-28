@@ -31,7 +31,7 @@ tags: [树莓派]
 2. 用网线连接Raspberry Pi和路由器
 3. 接通电源
 
-#### `登录Raspberry Pi`
+#### 登录Raspberry Pi
 1. 进路由器管理页面，查看Raspberry Pi的IP
 2. 在Mac上使用SSH登陆Raspberry Pi   
   **$ssh pi@xxx.xxx.xxx.xxx**    
