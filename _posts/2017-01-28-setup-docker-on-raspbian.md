@@ -2,7 +2,7 @@
 layout: post
 title:  Setup Docker On Raspbian
 description: how to setup & configure docker on raspbian
-modified: 2017-01-28
+modified: 2017-01-29
 tags: [Raspberry Docker]
 ---
 
@@ -14,6 +14,8 @@ Personally, I hate and refuse to do that manually even when I play with the Rasp
 
 And now, the container is much more popular, it makes the software development, deployment more agile and standardized. You may know Docker -- __Docker is the world's leading software containerization platform, and it is committed to build, ship and run software anywhere__. More about Docker, please read here [What is Docker][6].
 ![what-is-docker](/assets/images/docker-intro.png)
+
+---
 
 ### So how to setup and configure Docker on Raspberry?
 
@@ -42,9 +44,32 @@ ps aux | grep docker
 ```
 ![docker-info](/assets/images/docker-info.png)
 
+---
+
+### Play With Docker
+Raspberry is based on ARMv7 architecture, and normal docker images are built with amd64. Please pull and run with the proper ARMv7 images here: [ARMv7 Images][7].
+
++ #### Check your system information
+
+```
+uname -a
+
+# mine is here:
+# pi@raspberrypi:~ $ uname -a
+# Linux raspberrypi 4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016 armv7l GNU/Linux
+```
+
++ #### Hello World
+
+```
+sudo docker run armhf/hello-world
+```
+![hello-world-by-docker](/assets/images/hello-world-by-docker.png)
+
 [1]: https://github.com/shawzt/ansible-pi
 [2]: https://github.com/shawzt/pi_dashboard
 [3]: https://en.wikipedia.org/wiki/Don't_repeat_yourself
 [4]: /posts/setup-raspberry
 [5]: https://www.raspberrypi.org/downloads/raspbian/
 [6]: https://www.docker.com/what-docker
+[7]: https://hub.docker.com/u/armhf/
