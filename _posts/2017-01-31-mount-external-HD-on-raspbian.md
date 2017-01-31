@@ -38,9 +38,16 @@ Then done! So now we can read and write to the hardrive through Raspberry Pi!
 
 + #### Automount
 If you want to mount that drive from boot, we need to finish the last step!  
-Add one more line `/dev/sda2 /mnt ntfs defaults 0 0` to file `/etc/fstab`(_split with `tab`_).
+Add one more line `/dev/sda2 /mnt ntfs defaults,umask=0002 0 0` to file `/etc/fstab`(_split with `tab`_).
 ![fdisk](/assets/images/automount.png)
 Try to reboot your RPi to verify the automounting. ✔️
+
+---
+
+### How to unmount?
+```
+sudo umount /mnt
+```
 
 
 [1]: https://www.raspberrypi.org/downloads/raspbian/

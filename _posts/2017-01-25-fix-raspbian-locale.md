@@ -35,7 +35,7 @@ And here is the solution to fix this annoying issue:
 LANG=en_US.UTF-8  
 LC_ALL=en_US.UTF-8  
 LC_CTYPE=en_US.UTF-8  
-LANGUAGE=en_US.UTF-8`
+LANGUAGE=en_US.UTF-8
 ```
 
 + Restart your Raspberry Pi
