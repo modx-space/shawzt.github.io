@@ -34,7 +34,11 @@ cd /mnt
 ls
 touch test.txt
 ```
-Then done! So now we can read and write to the hardrive through Raspberry Pi!
+Then done! So now we can read and write to the hardrive through Raspberry Pi!  
+_If you still cannot do that even with `root` user, and occur the error 'Operation not permitted', please follow the solution here:_
+  + _check whether the mounte drive is in __NTFS__ with command: `sudo blkid`_
+  + _If so, you need to install lib __ntfs-3g__ with command: `sudo apt-get install ntfs-3g`_
+  + _reboot RPi_
 
 + #### Automount
 If you want to mount that drive from boot, we need to finish the last step!  
