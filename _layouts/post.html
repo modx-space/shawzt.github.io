@@ -36,14 +36,27 @@
             {{ content }}
           </div>
 
+          <hr>
+          
+          {% if site.donate_enabled %}
+          <div class="article-donate">
+            <h2><i class="fa fa-coffee" aria-hidden="true"></i></h2>
+            <img src="/assets/images/alipay.png" alt="支付宝" />
+            <img src="/assets/images/wechat.png" alt="微信" />
+          </div>
+          {% endif %}
+
+          {% if site.social.twitter %}
           <div class="article-share">
             <i>Share this by:
               {% assign page_title = page.title  | truncate '110' %}
-              <a href="" title="Share on Twitter" onclick="window.open('https://twitter.com/home?status={{ page_title }} - {{ page.url | absolute_url }} {% if site.social.twitter %}by @{{ site.social.twitter }}{% endif %}', 'newwindow', 'width=500, height=225'); return false;">
+              {% capture twitter_msg %}{{ page_title }} - {{ page.url | absolute_url }} by @{{ site.social.twitter }}{% endcapture %}
+              <a href="" title="Share on Twitter" onclick="window.open('https://twitter.com/home?status={{ twitter_msg }}', 'newwindow', 'width=500, height=225'); return false;">
                 <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
               </a>
-          </i>
+            </i>
           </div>
+          {% endif %}
 
           {% if site.discus_identifier %}
             <div id="disqus_thread"></div>

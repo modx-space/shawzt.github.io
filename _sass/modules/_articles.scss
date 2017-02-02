@@ -179,6 +179,20 @@
   }
 }
 
+.article-donate {
+  border-top: 2px dashed $base-border-color;
+  display: table;
+  margin: 0 auto;
+
+  h2 {
+    text-align: center;
+  }
+
+  img {
+    max-width: 200px;
+  }
+}
+
 @include breakpoint(small) {
   .article-list-footer {
     display: block;
