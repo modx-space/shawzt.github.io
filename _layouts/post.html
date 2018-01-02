@@ -37,7 +37,7 @@
           </div>
 
           <hr>
-          
+
           {% if site.donate_enabled %}
           <div class="article-donate">
             <h2><i class="fa fa-coffee" aria-hidden="true"></i></h2>
@@ -49,7 +49,7 @@
           {% if site.social.twitter %}
           <div class="article-share">
             <i>Share this by:
-              {% assign page_title = page.title  | truncate '110' %}
+              {% assign page_title = page.title  | truncate: 110 %}
               {% capture twitter_msg %}{{ page_title }} - {{ page.url | absolute_url }} by @{{ site.social.twitter }}{% endcapture %}
               <a href="" title="Share on Twitter" onclick="window.open('https://twitter.com/home?status={{ twitter_msg }}', 'newwindow', 'width=500, height=225'); return false;">
                 <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
