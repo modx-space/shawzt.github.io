@@ -16,7 +16,7 @@ blog_host: https://pages.github.com/
 discus_identifier: shawztblog
 ga_analytics: UA-47043610-1
 rss_enabled: true
-donate_enabled: true
+donate_enabled: false
 social:
   github: shawzt
   linkedin: shawzt
