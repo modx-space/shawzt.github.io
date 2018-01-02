@@ -22,17 +22,8 @@ social:
   linkedin: shawzt
   twitter: shawzt
 
-collections:
-  my_tags:
-    output: true
-    permalink: /tag/:slug/
-defaults:
-  -
-    scope:
-      path: ""
-      type: my_tags
-    values:
-      layout: articles_by_tag
+tag_page_layout: posts_by_tag
+tag_page_dir: tags
 
 permalink: posts/:slug
 
