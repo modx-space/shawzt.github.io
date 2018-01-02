@@ -14,8 +14,9 @@ title: "About"
 **爱好**
 
 + 爱好广泛，专长有限；夏天躲阴凉，冬天晒太阳
-+ 喜爱软件工程,逛逛Github、Stack Overflow、RubyChina……
-+ 空闲时看看电影、读读书、听听音乐、敲敲代码、写写博客
++ 喜爱软件工程,逛逛Github、Stack Overflow
++ 空闲时读读书、看看电影、听听音乐、敲敲代码
++ 尽力养成坚持写博客的习惯
 
 **工作**
 
@@ -23,6 +24,7 @@ title: "About"
 
 **技能**
 
++ Java & Spring
 + Ruby & Rails
-+ 学习Docker
-+ 学习Go
++ 学习Go, Kotlin
++ 学习Docker, k8s
