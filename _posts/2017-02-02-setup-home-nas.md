@@ -3,7 +3,7 @@ layout: post
 title:  Setup NAS For Home
 description: how to setup storage service with RPi and Docker
 modified: 2017-02-02
-tags: Raspberry Docker NAS
+tags: raspberry docker nas
 ---
 
 Normally when we want to backup data or transfer that among different devices, we need to do these actions one by one:

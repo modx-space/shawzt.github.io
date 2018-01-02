@@ -3,7 +3,7 @@ layout: post
 title: How To Fix Raspbian Locale Issue
 description: configure and fix Raspbian locale issue
 modified: 2017-01-25
-tags: Raspberry
+tags: raspberry
 ---
 
 I hope you have already setup your Raspberry Pi and made it running successfully. If not and you are also interested in this cool Pi, please review [how to active your Raspberry Pi][1].

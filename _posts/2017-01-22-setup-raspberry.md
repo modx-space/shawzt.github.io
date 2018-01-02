@@ -3,7 +3,7 @@ layout: post
 title: 激活你的树莓派(Raspberry Pi)
 description: 树莓派2代的系统安装和运行
 modified: 2017-01-22
-tags: [Raspberry]
+tags: raspberry
 ---
 
 树莓派(Raspberry Pi)是一款基于ARM的，仅有一张信用卡大小的电脑主板，以microSD卡做为启动、储存磁盘，且内置很多接口，如音/视频、USB、LAN等，见下图 _[图片来自网络]_。它由英国树莓派基金会所开发推广，目的是以低价硬件及自由软件刺激学校的基本计算机科学教育，更多请参考[Wiki][1]。![Image of Raspberry Pi](/assets/images/raspberry_pi.png)

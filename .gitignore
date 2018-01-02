@@ -2,10 +2,7 @@
 *.DS_Store
 *.tags
 
-_site/*
-# Github Pages doesn't support the gem jekyll-tagging
-# So need to commit mandatorily
-!_site/tags
+_site
 
 .sass-cache
 .jekyll-metadata
