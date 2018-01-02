@@ -3,7 +3,7 @@ layout: post
 title: How To Fix Raspbian "No Space Left" Issue
 description: Expand Raspbian Filesystem
 modified: 2017-01-26
-tags: [Raspberry]
+tags: Raspberry
 ---
 
 I would like to run some ruby programs on my little Raspberry Pi, so first of all, I need to install [Ruby][1] into my Raspberry Pi. However...

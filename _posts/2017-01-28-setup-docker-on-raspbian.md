@@ -3,7 +3,7 @@ layout: post
 title:  Setup Docker On Raspbian
 description: how to setup & configure docker on raspbian
 modified: 2017-01-29
-tags: [Raspberry Docker]
+tags: Raspberry Docker
 ---
 
 Originally, we need to install and configure lots of things on a host, no matter it is a traditional host or a VM, when we want to deploy the software or release a service. It is possible and not bad to do that only when we manage less than 5 hosts.

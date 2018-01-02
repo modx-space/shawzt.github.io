@@ -3,7 +3,7 @@ layout: post
 title: MacOS下制作SDcard/USB系统启动器
 description: 如何在MacOS下向SDcard/USB刻录系统
 modified: 2017-01-20
-tags: [工具]
+tags: 工具
 ---
 
 很多人都知道如何在Windows系统上制作一个U盘启动器，因为有很多辅助工具。但如何在MacOS下，向SDcard/USB刻录系统，制作系统启动器？本文将以刻录Ubuntu系统，介绍两种方式：

@@ -3,7 +3,7 @@ layout: post
 title:  Mount External Hard Drive On Raspbian
 description: how to mount external hard drive on raspbian
 modified: 2017-01-31
-tags: [Raspberry]
+tags: Raspberry
 ---
 
 For Raspberry Pi, it only needs a normal SDcard burned with the runnable OS image, like [Raspbian][1]. And you may also need to expand the filesystem to ensure all of the SDcard storage is available to the OS, see [how to fix raspbian no space issue][2].
