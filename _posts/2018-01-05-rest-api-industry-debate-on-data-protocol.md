@@ -8,7 +8,7 @@ tags: tech software-engineering
 
 如何与REST API交互正在不断地发展。在这篇文章中，我们来看看一些处于Web服务技术前沿的标准。
 
-Progress公司的高级软件工程师--Jeff Leinbach和开发者布道师--Saikrishna Teja Bobba，进行了这项研究，以帮助你决定在你的应用程序或数据分析管理工具中考虑采用哪种标准API。我们对比了OData，GraphQL和ORDS之间的差异，这些是用于通过Internet进行查询和更新数据的标准API和服务。关注点在于跨API的互通性，以进行分析、集成和数据管理。
+Progress公司的高级软件工程师--Jeff Leinbach和开发者布道师--Saikrishna Teja Bobba，进行了这项研究，以帮助你决定在应用程序或数据分析管理工具中考虑采用哪种标准API。我们对比了OData，GraphQL和ORDS之间的差异，这些是用于通过Internet进行查询和更新数据的标准API和服务。关注点在于跨API的互通性，以进行分析、集成和数据管理。
 
 我们一直在基于业界活动，如AWS re:Invent，Oracle OpenWorld，Dreamforce，API World等众多的讨论来跟踪这些议题。Progress公司在数据访问标准，包括ODBC，JDBC，ADO.NET以及现在的OData(REST)的开发和贡献上也有丰富的经验，并且也是第一个加入OData技术委员会的成员。
 
@@ -87,7 +87,7 @@ OData很强大，但有很多繁重的工作，因为你必须遵守标准的所
 
 > 作者：[Sumit Sarkar][1]，原文见[Progress Blog][2]
 >
-> 于2018-01-04翻译，不足之前，敬请指正。转载请注明出处
+> 于2018-01-04翻译，不足之处，敬请指正。转载请注明出处
 
 [1]: https://www.progress.com/blogs/author/sumit-sarkar
 [2]: https://www.progress.com/blogs/rest-api-industry-debate-odata-vs-graphql-vs-ords
