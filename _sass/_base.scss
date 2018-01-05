@@ -130,11 +130,9 @@ blockquote {
 // =============================================================================
 
 hr {
-  margin: 0;
-  border-top: 0;
-  border-right: 0;
+  margin: 10px 0px;
+  border: 0;
   border-bottom: 1px dashed $base-border-color;
-  border-left: 0;
 }
 
 img {
