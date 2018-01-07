@@ -1,4 +1,4 @@
 ---
 slug: personal
-name: personal
+name: Personal
 ---

@@ -1,4 +1,4 @@
 ---
 slug: raspberry
-name: raspberry
+name: Raspberry
 ---

@@ -3,7 +3,7 @@ layout: post
 title:  REST API行业讨论：OData vs GraphQL vs ORDS
 description: REST API Data Protocol
 modified: 2018-01-05
-tags: tech software-engineering
+tags: tech software-engineering translation
 ---
 
 如何与REST API交互正在不断地发展。在这篇文章中，我们来看看一些处于Web服务技术前沿的标准。

@@ -1,4 +1,4 @@
 ---
 slug: docker
-name: docker
+name: Docker
 ---

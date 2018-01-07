@@ -1,4 +1,4 @@
 ---
 slug: tool
-name: tool
+name: Tool
 ---
