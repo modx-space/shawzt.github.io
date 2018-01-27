@@ -85,7 +85,7 @@ OData很强大，但有很多繁重的工作，因为你必须遵守标准的所
 
 ---
 
-> 作者：[Sumit Sarkar][1]，原文见[Progress Blog][2]
+> 原文作者：[Sumit Sarkar][1]，见[Progress Blog][2]
 >
 > 于2018-01-04翻译，不足之处，敬请指正。转载请注明出处
 
