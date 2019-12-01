@@ -37,8 +37,9 @@ tags: tech personal
   + ![domain](/assets/images/dig-github-pages.png)
   + ![domain](/assets/images/dig-subdomain.png)
 
-> 参考: [关于DNS][4]
 ---
+
+> 参考: [关于DNS][4]
 
 [1]: https://godaddy.com/
 [2]: http://jekyllrb.com/
