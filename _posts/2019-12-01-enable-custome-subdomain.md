@@ -35,7 +35,6 @@ tags: tech personal
 ### 验证
 1. 运行`dig`命令：  
   + ![domain](/assets/images/dig-github-pages.png)
-
   + ![domain](/assets/images/dig-subdomain.png)
 
 > 参考: [关于DNS][4]
