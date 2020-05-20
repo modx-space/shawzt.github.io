@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>聊一聊负载均衡(一) // Modx Blog</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="聊一聊负载均衡(一)" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://shawzt.github.io/posts/2018-01-10-load-balancing/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://shawzt.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://shawzt.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://shawzt.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.69.2" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://shawzt.github.io/">Modx Blog</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/posts">文章</a>
+                
+                <a class="main-nav-link" href="/about">关于</a>
+                
+                <a class="main-nav-link" href="/tags">标签</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">聊一聊负载均衡(一)</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/posts/2018-01-10-load-balancing/" class="article-date">
+                <time datetime='2018-01-10T00:00:00.000&#43;00:00' itemprop="datePublished">2018-01-10</time>
+            </a>
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="负载均衡是什么">负载均衡是什么？</h3>
+<p>首先来看一下Wikipedia上，对<a href="https://zh.wikipedia.org/wiki/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1">负载均衡</a>给出的定义与说明:</p>
+<blockquote>
+<p>负载均衡(Load Balancing / LB)是一种计算机网络技术，用来在多个计算机(即计算机集群)，网络连接，CPU或其他资源中分配负载，以达到资源使用最优化，吞吐率最大化，响应时间最小化，同时避免过载的目的。</p>
+</blockquote>
+<p>定义一般都是高度抽象概括的，我们需要通过实际场景来认识和理解负载均衡在软件架构，服务中的作用。</p>
+<p>想想以下两种服务器端应用程序该如何部署以响应用户的访问：个人搭建的博客，淘宝网站。显而易见，对于个人搭建的博客（而非使用托管的博客服务），一般只会简单地部署在单机上，然后绑定域名以便在Internet上可访问；而像淘宝这样的大型网站来说，仅使用一台服务器是肯定无法支撑那海量的访问和交易，所以针对这样的大型网站，需要对系统进行多维度的扩展以应对高并发请求和海量数据的处理，提高系统的性能。</p>
+<p>系统的扩展一般会关注以下三个方面：</p>
+<ul>
+<li>垂直(Y-Axis)方向
+<ul>
+<li>拆分业务，构建独立服务</li>
+</ul>
+</li>
+<li>水平(X-Axis)方向
+<ul>
+<li>部署实例，避免单点故障</li>
+</ul>
+</li>
+<li>纵深(Z-Axis)方向
+<ul>
+<li>分离，共享数据</li>
+</ul>
+</li>
+</ul>
+<p>附上经典配图：
+<img src="/images/art-of-scalability.png" alt="art-of-scalability"></p>
+<p>对于服务器端的应用程序而言，从单机部署到分布式集群发布，是为了应对高并发，提高系统的整体性能。但是，集群内以不同服务，多个实例运行的方式，也带来了一些其他的挑战，诸如故障转移，服务降级，动态伸缩，安全防护等。同时，关键的问题是，<strong>又该如何将用户的请求正确合理地分发到目标服务的目标机器上呢？</strong></p>
+<p>这就是负载均衡应对的场景，它是应用系统（每个拆分出来独立部署运行的服务，也是一个应用系统）的守卫，通过流量分发来扩展应用系统对外的服务能力，通过消除单点故障提升应用系统的可用性。
+<img src="/images/load-balancing.png" alt="load-balancing"></p>
+<p>负载均衡作为软件架构中的一个组件，在应用程序的实施部署中，可以是一个硬件设施，如F5，Cicso；也可以是一个软件应用，如Nginx，HAProxy。视情况，它可以提供以下功能：健康检查，分发调度，URL转发，访问控制，证书管理&hellip;</p>
+<hr>
+<h3 id="负载均衡怎么玩">负载均衡怎么玩？</h3>
+<p>认识并理解了负载均衡是什么，现在来看看具体的实践方案。</p>
+<ul>
+<li>
+<p><strong>DNS解析</strong></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F">DNS</a>负责将请求的域名解析成实际的IP地址，每个域名可以有多个A记录。依此，DNS服务便可作为负载均衡的一种解决方案，这样降低了站点的负载均衡实现及维护成本。常见的DNS策略是对多个A记录进行轮询。</p>
+<ul>
+<li>DNS负载均衡工作原理示意图：
+<img src="/images/dns-lb.png" alt="dns-lb"></li>
+</ul>
+<ul>
+<li>特点
+<ul>
+<li>使用简单</li>
+<li>主要用于实现地理级别的跨区域均衡</li>
+<li>======</li>
+<li>延迟高：修改DNS，解析时间长；且在解析过程中，用户无法访问站点</li>
+<li>扩展差：DNS由域名商管理，且支持的调度算法少，无法反馈系统及服务的状态</li>
+<li>耗费高：每个A记录对应的IP都是公网可访问的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p><strong>HTTP重定向</strong></p>
+<p>HTTP协议提供了一种特形式的响应&ndash;<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Redirections">HTTP重定向</a>，可用于转发请求URL至新的地址。通过HTTP响应头的Location标记来返回一个新的URL，使得客户端能够使用新的URL来重新发送请求。</p>
+<ul>
+<li>HTTP重定向工作示意图：
+<img src="/images/http-redirect.png" alt="http-redirect"></li>
+<li>HTTP重定向负载均衡工作原理示意图：
+<img src="/images/http-redirect-lb.png" alt="http-redirect-lb"></li>
+</ul>
+<ul>
+<li>特点
+<ul>
+<li>使用相对简单</li>
+<li>可根据URL规则进行流量转发</li>
+<li>======</li>
+<li>扩展差：无法根据应用服务器的系统及服务的状态来动态调整调度</li>
+<li>耗费高：每个应用服务器都需要具有公网IP</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p><strong>反向代理</strong></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86">反向代理服务</a>根据客户端的请求，从后端的服务器（如Web应用服务器）上获取资源，然后再将这些资源返回给客户端，其核心就是转发HTTP请求。所有的请求和响应都必须经过代理服务器，实际提供服务的后端应用服务器对于客户端来说是透明的。因为它工作在HTTP层面，因此，基于反向代理的负载均衡也叫七层负载均衡。</p>
+<ul>
+<li>反向代理负载均衡工作原理示意图：
+<img src="/images/reverse-proxy-lb.png" alt="reverse-proxy-lb"></li>
+</ul>
+<ul>
+<li>特点
+<ul>
+<li>隐藏应用服务器集群，安全可靠</li>
+<li>Nginx，HAProxy等软件开源可用</li>
+<li>具有高性能、高并发、低内存使用等特点</li>
+<li>具有多种适用于不同场景的负载均衡策略</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>LVS负载均衡</strong></p>
+<p>LVS(Linux Virtual Server)是一个工作在IP层的负载均衡器，因此也称作四层负载均衡。它的实现和iptables/netfilter类似，工作在内核空间的TCP/IP协议栈上，LVS工作在INPUT Hook Funtion上，并在INPUT设置附加规则，一旦客户端请求的是集群服务，LVS会强行修改请求报文，将报文发往POSTROUTING，转发至后端的主机。</p>
+<blockquote>
+<p>LVS集群中的设备/地址命名规范如下：</p>
+</blockquote>
+<ul>
+<li>VIP：LVS面向客户端请求的IP地址</li>
+<li>DIP：LVS与后端服务器通信的IP</li>
+<li>RIP：后端服务器与LVS通信的IP</li>
+<li>CIP：客户端的IP地址</li>
+</ul>
+<ul>
+<li>
+<p><strong>LVS-NAT模式</strong>
+<img src="/images/lvs-nat-lb.png" alt="lvs-nat-lb"></p>
+<ul>
+<li>特点
+<ul>
+<li>应用服务器集群节点跟LVS必须在同一物理网络中</li>
+<li>RIP通常是私有地址，仅用于各集群节点间的通信</li>
+<li>LVS位于客户端和集群之间，负责处理进出的所有报文</li>
+<li>集群的各节点必须将网关指向LVS的DIP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>LVS-DR模式</strong>
+<img src="/images/lvs-dr-lb.png" alt="lvs-dr-lb"></p>
+<ul>
+<li>特点
+<ul>
+<li>应用服务器集群节点跟LVS必须在同一个IP网络中</li>
+<li>LVS的VIP用于接受客户端请求，DIP用于和集群之间通信</li>
+<li>集群的各节点都配有和LVS相同的VIP，仅用户响应客户端的请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>LVS-IP通道模式</strong>
+<img src="/images/lvs-iptun-lb.png" alt="lvs-iptun-lb"></p>
+<ul>
+<li>特点
+<ul>
+<li>应用服务器集群节点和LVS可以跨Internet</li>
+<li>VIP，DIP，RIP都是公网地址</li>
+<li>LVS的VIP用于接受客户端请求，DIP用于和集群之间通信</li>
+<li>集群的各节点都配有和LVS相同的VIP，仅用户响应客户端的请求</li>
+<li>集群的各节点只能使用支持IP隧道功能的操作系统</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#负载均衡是什么">负载均衡是什么？</a></li>
+        <li><a href="#负载均衡怎么玩">负载均衡怎么玩？</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/translation">translation
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/development">development
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="/posts/2018-01-18-what-is-dns/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            是什么系列之DNS
+        </div>
+    </a>
+    
+    
+    <a href="/posts/2018-01-05-rest-api-industry-debate-on-data-protocol/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">REST API行业讨论：OData vs GraphQL vs ORDS&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shawztblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 Modx Blog
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-47043610-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin="anonymous"></script>
+        <script>renderMathInElement(document.body);</script>
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

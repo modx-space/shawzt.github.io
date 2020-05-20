@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Modx Blog</title>
+    <link>https://shawzt.github.io/</link>
+    <description>Recent content on Modx Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 04 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shawzt.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>为多个Github账号配置SSH keys</title>
+      <link>https://shawzt.github.io/posts/2020-01-04-multiple-ssh-keys-management/</link>
+      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2020-01-04-multiple-ssh-keys-management/</guid>
+      <description>SSH keys with multiple Github accounts</description>
+    </item>
+    
+    <item>
+      <title>配置自定义域名</title>
+      <link>https://shawzt.github.io/posts/2019-12-01-enable-custome-subdomain/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2019-12-01-enable-custome-subdomain/</guid>
+      <description>Enable Custome Subdomain</description>
+    </item>
+    
+    <item>
+      <title>Java类加载器的一些事</title>
+      <link>https://shawzt.github.io/posts/2018-06-05-class-loaders-in-java/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2018-06-05-class-loaders-in-java/</guid>
+      <description>Class Loaders In Java</description>
+    </item>
+    
+    <item>
+      <title>是什么系列之负载均衡</title>
+      <link>https://shawzt.github.io/posts/2018-01-27-what-is-load-balancing/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2018-01-27-what-is-load-balancing/</guid>
+      <description>What Is Load Balancing</description>
+    </item>
+    
+    <item>
+      <title>是什么系列之DNS</title>
+      <link>https://shawzt.github.io/posts/2018-01-18-what-is-dns/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2018-01-18-what-is-dns/</guid>
+      <description>What Is DNS</description>
+    </item>
+    
+    <item>
+      <title>聊一聊负载均衡(一)</title>
+      <link>https://shawzt.github.io/posts/2018-01-10-load-balancing/</link>
+      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2018-01-10-load-balancing/</guid>
+      <description>Load Balancing</description>
+    </item>
+    
+    <item>
+      <title>REST API行业讨论：OData vs GraphQL vs ORDS</title>
+      <link>https://shawzt.github.io/posts/2018-01-05-rest-api-industry-debate-on-data-protocol/</link>
+      <pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2018-01-05-rest-api-industry-debate-on-data-protocol/</guid>
+      <description>REST API Data Protocol</description>
+    </item>
+    
+    <item>
+      <title>Bye 2017, New 2018</title>
+      <link>https://shawzt.github.io/posts/2018-01-02-new-2018/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2018-01-02-new-2018/</guid>
+      <description>Personal annual summary and plan</description>
+    </item>
+    
+    <item>
+      <title>Setup NAS For Home</title>
+      <link>https://shawzt.github.io/posts/2017-02-02-setup-home-nas/</link>
+      <pubDate>Thu, 02 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2017-02-02-setup-home-nas/</guid>
+      <description>how to setup storage service with RPi and Docker</description>
+    </item>
+    
+    <item>
+      <title>Mount External Hard Drive On Raspbian</title>
+      <link>https://shawzt.github.io/posts/2017-01-31-mount-external-hd-on-raspbian/</link>
+      <pubDate>Tue, 31 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2017-01-31-mount-external-hd-on-raspbian/</guid>
+      <description>how to mount external hard drive on raspbian</description>
+    </item>
+    
+    <item>
+      <title>Setup Docker On Raspbian</title>
+      <link>https://shawzt.github.io/posts/2017-01-28-setup-docker-on-raspbian/</link>
+      <pubDate>Sun, 29 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2017-01-28-setup-docker-on-raspbian/</guid>
+      <description>how to setup &amp;amp; configure docker on raspbian</description>
+    </item>
+    
+    <item>
+      <title>How To Fix Raspbian &#34;No Space Left&#34; Issue</title>
+      <link>https://shawzt.github.io/posts/2017-01-26-fix-raspbian-no-space/</link>
+      <pubDate>Thu, 26 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2017-01-26-fix-raspbian-no-space/</guid>
+      <description>Expand Raspbian Filesystem</description>
+    </item>
+    
+    <item>
+      <title>How To Fix Raspbian Locale Issue</title>
+      <link>https://shawzt.github.io/posts/2017-01-25-fix-raspbian-locale/</link>
+      <pubDate>Wed, 25 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2017-01-25-fix-raspbian-locale/</guid>
+      <description>configure and fix Raspbian locale issue</description>
+    </item>
+    
+    <item>
+      <title>激活你的树莓派(Raspberry Pi)</title>
+      <link>https://shawzt.github.io/posts/2017-01-22-setup-raspberry/</link>
+      <pubDate>Sun, 22 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2017-01-22-setup-raspberry/</guid>
+      <description>树莓派2代的系统安装和运行</description>
+    </item>
+    
+    <item>
+      <title>MacOS下制作SDcard/USB系统启动器</title>
+      <link>https://shawzt.github.io/posts/2017-01-20-burn-image-to-sdcard-on-osx/</link>
+      <pubDate>Fri, 20 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/posts/2017-01-20-burn-image-to-sdcard-on-osx/</guid>
+      <description>如何在MacOS下向SDcard/USB刻录系统</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://shawzt.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://shawzt.github.io/about/</guid>
+      <description>关于我 基本信息 80后的尾巴，90后的头 幸福的三口之家👪 爱好 爱好广泛，专长有限；夏天躲阴凉，冬天晒太阳 空闲时读读书、看看电影、听听音乐、敲敲代</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>配置自定义域名 // Modx Blog</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="配置自定义域名" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://shawzt.github.io/posts/2019-12-01-enable-custome-subdomain/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://shawzt.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://shawzt.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://shawzt.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.69.2" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://shawzt.github.io/">Modx Blog</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/posts">文章</a>
+                
+                <a class="main-nav-link" href="/about">关于</a>
+                
+                <a class="main-nav-link" href="/tags">标签</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">配置自定义域名</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/posts/2019-12-01-enable-custome-subdomain/" class="article-date">
+                <time datetime='2019-12-01T00:00:00.000&#43;00:00' itemprop="datePublished">2019-12-01</time>
+            </a>
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="概要">概要</h3>
+<p>最近刚从服务商<a href="https://godaddy.com/">GoDaddy</a>那购买了打算已久的域名，为了不让这宝贵的资源闲置，也让自己这常年不更新的博客显得‘高端’些，所以就把域名的首次应用配置到基于<a href="http://jekyllrb.com/">Jekyll</a> + <a href="https://pages.github.com/">Github Pages</a>搭建起来的个人博客上。</p>
+<p>以下是具体的操作步骤：
+(这里略过域名购买以及博客搭建)</p>
+<h3 id="域名dns配置">域名DNS配置</h3>
+<ol>
+<li>登录GoDaddy，进入我的域名管理：<img src="/images/domain.png" alt="domain"></li>
+<li>在需要设置的域名下，点击’管理DNS‘</li>
+<li>添加CNAME记录：<img src="/images/dns-subdomain.png" alt="domain"></li>
+</ol>
+<ul>
+<li>类型选择：<code>CNAME</code></li>
+<li>主机：就是subdomain，如<code>www</code>，<code>blog</code>等</li>
+<li>指向：就是默认的<code>&lt;user&gt;.github.io</code></li>
+</ul>
+<h3 id="博客配置">博客配置</h3>
+<ul>
+<li>
+<p><strong>添加CNAME</strong></p>
+<ol>
+<li>在博客repo的根目录下，新建文件<code>CNAME</code>（没有任何后缀名）</li>
+<li>添加CNAME记录，我的配置就是：<code>blog.modx.space</code></li>
+<li>提交并推送改动</li>
+</ol>
+</li>
+<li>
+<p><strong>Github Pages</strong></p>
+<ol>
+<li>登录github，并进入博客repo的设置</li>
+<li>在上述CNAME改动提交并推送后，就可以在<em>Github Pages</em>部分看到自定义的域名已配置成功</li>
+<li>为博客开启<em>HTTPS</em>
+<img src="/images/github-pages.png" alt="domain"></li>
+</ol>
+</li>
+</ul>
+<h3 id="验证">验证</h3>
+<ol>
+<li>运行<code>dig</code>命令：</li>
+</ol>
+<ul>
+<li><img src="/images/dig-github-pages.png" alt="domain"></li>
+<li><img src="/images/dig-subdomain.png" alt="domain"></li>
+</ul>
+<hr>
+<p>链接</p>
+<ul>
+<li><em><a href="/posts/what-is-dns">关于DNS</a></em></li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概要">概要</a></li>
+        <li><a href="#域名dns配置">域名DNS配置</a></li>
+        <li><a href="#博客配置">博客配置</a></li>
+        <li><a href="#验证">验证</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/development">development
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="/posts/2020-01-04-multiple-ssh-keys-management/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            为多个Github账号配置SSH keys
+        </div>
+    </a>
+    
+    
+    <a href="/posts/2018-06-05-class-loaders-in-java/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Java类加载器的一些事&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shawztblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 Modx Blog
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-47043610-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin="anonymous"></script>
+        <script>renderMathInElement(document.body);</script>
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

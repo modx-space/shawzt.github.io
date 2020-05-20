@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>是什么系列之DNS // Modx Blog</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="是什么系列之DNS" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://shawzt.github.io/posts/2018-01-18-what-is-dns/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://shawzt.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://shawzt.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://shawzt.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.69.2" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://shawzt.github.io/">Modx Blog</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/posts">文章</a>
+                
+                <a class="main-nav-link" href="/about">关于</a>
+                
+                <a class="main-nav-link" href="/tags">标签</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">是什么系列之DNS</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/posts/2018-01-18-what-is-dns/" class="article-date">
+                <time datetime='2018-01-18T00:00:00.000&#43;00:00' itemprop="datePublished">2018-01-18</time>
+            </a>
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="/images/dns.png" alt="load-balancing"></p>
+<h3 id="概要">概要</h3>
+<p>使用因特网协议(IP)进行通信需要每个端点由数字IP地址标识。实际上需要IP地址才能将消息发送给接收方，就像拨打电话所需的数字电话号码一样。</p>
+<p>在互联网初期，条目被添加到存留在计算机上的“hosts文件”中，该文件将人类可读的名称与IP相关联。用户可以使用hosts文件中的名称而不是IP地址来访问站点。</p>
+<h3 id="dns如何工作">DNS如何工作</h3>
+<p>域名由注册商发布，域名服务器提供关于IP及与之相关联的域的详细信息。域名注册有效期为1到10年，注册商通常也会向其客户提供域名服务器。(一些开发人员可能会选择运行自己的域名服务器以获得更好的控制权)</p>
+<p><strong>以下是关于DNS如何工作的分步说明：</strong></p>
+<ol>
+<li>用户在浏览器中输入一个像www.example.com这样的URL</li>
+<li>计算机执行DNS请求将example.com解析为实际的IP地址</li>
+<li>DNS请求从一组权威域名服务器开始，并确定是否有关于example.com的域名服务器。域名服务器具有单独的“权限区域”，并且请求可能被路由到不同的区域</li>
+<li>计算机遵循层次结构，直到最终到达example.com的域名服务器。对于网络请求，计算机请求“www”的记录并接收关联的IP地址（10.20.30.40）</li>
+<li>使用此IP地址，计算机可以与服务器通信并加载http://www.example.com的内容</li>
+</ol>
+<h3 id="dns记录类型">DNS记录类型</h3>
+<ul>
+<li>
+<p><strong>A记录</strong><br>
+计算机可能会将结果缓存一段由域名服务器定义的时间段，而不是对每个请求执行完整的DNS查找。典型的DNS条目如下所示：<code>www.example.com A 3600 10.20.30.40</code>。此条目表示该A记录结果应缓存3600秒(1小时)。在更改IP地址之前，管理员通常会将超时值更改为较低的值(分钟)。</p>
+</li>
+<li>
+<p><strong>CNAME记录</strong><br>
+除了A记录外，还有其他几种记录类型。CNAME记录可让你将一个域名指向另一个域名。最终，CNAME记录链由指向实际IP地址的A记录解析。</p>
+</li>
+<li>
+<p><strong>MX和TXT记录</strong> <br>
+MX记录用于设置电子邮件服务器的IP地址(通常与Web服务器不同)；TXT记录用于信息目的，如验证域名的所有权。</p>
+</li>
+</ul>
+<h3 id="dns示例">DNS示例</h3>
+<p>DNS是Internet的主干技术，在设置或配置服务器基础架构时尤其重要。当购买新域名时，注册商通常会要你的服务器IP地址并添加到他们的域名服务器，或允许你使用自己的域名服务器。</p>
+<p>大多数的CDN要求你在域名上创建一个指向CDN的新DNS条目，这使得使用你自己的域名从CDN上加载资源变得容易。同样，像Heroku这样的平台即服务提供商可以让你将域名指向他们的服务器，这样你就可以在使用其托管的基础架构的同时保留自己域名。</p>
+<h3 id="dns的好处">DNS的好处</h3>
+<ol>
+<li>用户得到一个友好的域名，而不是计算机所需的IP地址</li>
+<li>开发人员可以在不影响用户的情况下更改服务器，因为可以动态查找IP地址</li>
+<li>开发人员可以通过将其域名配置为使用CDN或云托管环境而不是自己的服务器来提高性能</li>
+</ol>
+<h3 id="结论">结论</h3>
+<p>域名是在线服务的入口点，了解它们的工作方式对于整合外部服务至关重要。 <br>
+内容交付网络，如StackPath，有DNS设置说明，为用户提供快速的品牌化的在线体验。</p>
+<hr>
+<p>链接</p>
+<ul>
+<li><em>原文: <a href="https://blog.stackpath.com/glossary/dns/">StackPath - What is DNS?</a></em></li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概要">概要</a></li>
+        <li><a href="#dns如何工作">DNS如何工作</a></li>
+        <li><a href="#dns记录类型">DNS记录类型</a></li>
+        <li><a href="#dns示例">DNS示例</a></li>
+        <li><a href="#dns的好处">DNS的好处</a></li>
+        <li><a href="#结论">结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/translation">translation
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/development">development
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="/posts/2018-01-27-what-is-load-balancing/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            是什么系列之负载均衡
+        </div>
+    </a>
+    
+    
+    <a href="/posts/2018-01-10-load-balancing/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">聊一聊负载均衡(一)&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shawztblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 Modx Blog
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-47043610-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin="anonymous"></script>
+        <script>renderMathInElement(document.body);</script>
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Java类加载器的一些事 // Modx Blog</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Java类加载器的一些事" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://shawzt.github.io/posts/2018-06-05-class-loaders-in-java/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://shawzt.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://shawzt.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://shawzt.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.69.2" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://shawzt.github.io/">Modx Blog</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/posts">文章</a>
+                
+                <a class="main-nav-link" href="/about">关于</a>
+                
+                <a class="main-nav-link" href="/tags">标签</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Java类加载器的一些事</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/posts/2018-06-05-class-loaders-in-java/" class="article-date">
+                <time datetime='2018-06-05T00:00:00.000&#43;00:00' itemprop="datePublished">2018-06-05</time>
+            </a>
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="什么是类加载器">什么是类加载器</h3>
+<p>类加载器负责在运行时动态地将Java类加载进JVM(Java虚拟机)，同时，它们也是JRE(Java运行时环境)的一部分。因此，借助类加载器JVM无需知道底层文件或文件系统来运行Java程序。此外，Java类并不是一次全部被加载进内存，而是在应用程序需要时加载。这就是类加载器作用之处，它们负责将文件系统、网络或其他来源的类文件加载进内存。<br>
+在本文，我们将讨论不同类型的内置类加载器，它们如何工作以及关于自定义内加载器的实现。</p>
+<h3 id="内置的类加载器">内置的类加载器</h3>
+<p>让我们从一个简单的例子开始，学习不同的类如何被类加载器加载：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printClassLoaders</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> ClassNotFoundException <span style="color:#f92672">{</span>
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Classloader of this class: &#34;</span>
+    <span style="color:#f92672">+</span> PrintClassLoader<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">());</span>
+
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Classloader of Logging: &#34;</span>
+    <span style="color:#f92672">+</span> Logging<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">());</span>
+
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Classloader of ArrayList: &#34;</span>
+    <span style="color:#f92672">+</span> ArrayList<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">());</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>这是上述代码被执行后的输出：</p>
+<pre><code>Classloader of this class: sun.misc.Launcher$AppClassLoader@18b4aac2
+Classloader of Logging: sun.misc.Launcher$ExtClassLoader@1d44bcfa
+Classloader of ArrayList: null
+</code></pre><p>如上，这里有三种不同的类加载器：Application，Extension以及Bootstrap类加载器(显示为null，为何呢？)。</p>
+<ul>
+<li>Application类加载器加载了包含示例方法的类，它用于加载在类路径中的应用自己的文件</li>
+<li>Extension类加载器加载了Logging类，它用于加载标准核心Java类的扩展类</li>
+<li>Bootstrap类加载器加载了ArrayList类，它是所有其他加载器的父类</li>
+</ul>
+<p>但是，我们可以看到最后一个输出，对于ArrayList是null，这是因为Bootstrap类加载器是用本地代码编写的，而不是Java，因此它不会显示为Java类。由于这个原因，Bootstrap类加载器的行为在不同的JVM之间会有所不同。</p>
+<hr>
+<p>现在，让我们来更详细地聊一聊各个类加载器。</p>
+<ul>
+<li>
+<p><strong>Bootstrap类加载器</strong></p>
+<p>Java类由 <em>java.lang.ClassLoader</em> 的实例加载。但是，类加载器本身也是类，因此，问题来了，谁负责加载 <em>java.lang.ClassLoader</em>？这就是Bootstrap类加载器起作用的地方。它主要用于负责加载JDK相关的类，通常是<code>rt.jar</code>以及位于<code>$JAVA_HOME/jre/lib</code>目录下的其他核心库。此外，Bootstrap类加载器是其他所有类加载器实例的父类。<br>
+Bootstrap类加载器是JVM核心的一部分，并且使用本地代码编写，正如上述示例所示。不同的平台可能对这个特定的类加载器有不同的实现。</p>
+</li>
+<li>
+<p><strong>Extension类加载器</strong></p>
+<p>Extension类加载器是Bootstrap类加载器的子类，用于负责加载标准核心Java类的扩展，所以它对于所有运行在该平台上的应用都可用。Extension类加载器从JDK的扩展目录下加载，通常是<code>$JAVA_HOME/lib/ext</code>目录或者是系统属性<code>java.ext.dirs</code>中配置的任何其他目录。</p>
+</li>
+<li>
+<p><strong>Application类加载器</strong></p>
+<p>Application类加载器会负责将所有应用程序级别的类加载到JVM中。它加载在 <em>classpath</em> 环境变量中找到的文件。此外，它是Extension类加载器的子类。</p>
+</li>
+</ul>
+<hr>
+<h3 id="类加载器如何工作">类加载器如何工作</h3>
+<p>类加载器是Java运行时环境即JRE的一部分，当JVM请求一个类时，类加载器会尝试根据完全限定类名(package.ClassName)来定位该类并将类定义加载进运行
+时。 <br>
+<em>java.lang.ClassLoader.loadClass()</em> 方法负责将类定义加载进运行时，该方法会依据类的完全限定名来加载。如果该类尚未被加载，则该请求会被委托给父类加载器，这个过程是递归进行的。最终，如果父类加载器均未能找到并加载该类，那么子类加载器将调用 <em>java.net.URLClassLoader.findClass()</em> 方法在文件系统中查找该类。如果最后一个子类加载器也未能加载该类，则会抛出 <em>java.lang.ClassNotFoundException</em> 异常。</p>
+<p>以下是 <em>ClassNotFoundException</em> 异常的示例输出：</p>
+<pre><code>java.lang.ClassNotFoundException: TestClassLoaderClass
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:338)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:264)
+	at com.learning.zxiao.Main.tryToLoadClass(Main.java:31)
+	at com.learning.zxiao.Main.main(Main.java:12)
+</code></pre><p>如果查看 <em>java.lang.Class.forName()</em> 的调用执行序列，我们可以明白它首先尝试通过父类加载器去加载所需的类，然后再通过 <em>java.net.URLClassLoader.findClass()</em> 来查找该类。若仍无法找到该类，就会抛出 <em>ClassNotFoundException</em> 异常。</p>
+<p><img src="/images/java-class-loader.png" alt="Java ClassLoader"></p>
+<p>依据类加载器的工作机制，类加载器有如下三个重要特性：<br>
+<strong>委托模式</strong></p>
+<p>类加载器遵循委托模式，在响应请求来查找类或资源时，ClassLoader的实例会将类或资源的搜索委托给其父类加载类。
+假设我们有一个将应用程序类加载到JVM中的请求，Application类加载器首先将该类的加载委派给Extension类加载器，然后将其委托给Bootstrap类加载器。只有在Bootstrap和Extension类加载器在加载类不成功时，Application类加载器才会尝试加载该类。换言之，父类加载器加载过的类不能被子类加载器再次加载，每个类仅会被加载一次。</p>
+<p><strong>单一性</strong></p>
+<p>委派模式带来是我们能容易地确保所加载类的独特唯一，因为我们总是通过向上委派来搜索加载类。类加载器的任务是根据一个类的全限定名来读取此类的二进制字节流到JVM中，然后转换为一个与目标类对应的java.lang.Class对象实例。在JVM中表示两个class对象是否为同一个类对象存在两个必要条件：</p>
+<ol>
+<li>类的完整类名必须一致，包括包名</li>
+<li>加载这个类的ClassLoader(指ClassLoader实例对象)必须相同</li>
+</ol>
+<p><strong>可见性</strong></p>
+<p>子类加载器可以看见所有由父类加载器加载的类，反之则不然。</p>
+<hr>
+<h3 id="自定义类加载器">自定义类加载器</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DemoClassLoader</span> <span style="color:#66d9ef">extends</span> ClassLoader <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">DemoClassLoader</span><span style="color:#f92672">(</span>ClassLoader parent<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">super</span><span style="color:#f92672">(</span>parent<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> Class <span style="color:#a6e22e">getClass</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ClassNotFoundException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> b <span style="color:#f92672">=</span> loadClassFromRepo<span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> defineClass<span style="color:#f92672">(</span>name<span style="color:#f92672">,</span> b<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> b<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Class<span style="color:#f92672">&lt;?&gt;</span> loadClass<span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ClassNotFoundException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">startsWith</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.learning.zxiao&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Loading Class from Demo Class Loader&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> getClass<span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">loadClass</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">loadClassFromRepo</span><span style="color:#f92672">(</span>String fileName<span style="color:#f92672">)</span>  <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// Returns a byte array from specified file.
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>现在来看看自定义类加载器所继承的抽象类 <em>java.lang.ClassLoader</em> 中几个重要方法：</p>
+<ul>
+<li>
+<p><strong>loadClass()方法</strong></p>
+<p>看一下JDK源码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">protected</span> Class<span style="color:#f92672">&lt;?&gt;</span> loadClass<span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> resolve<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ClassNotFoundException
+  <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>getClassLoadingLock<span style="color:#f92672">(</span>name<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+          <span style="color:#75715e">// First, check if the class has already been loaded
+</span><span style="color:#75715e"></span>          Class<span style="color:#f92672">&lt;?&gt;</span> c <span style="color:#f92672">=</span> findLoadedClass<span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>c <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+              <span style="color:#66d9ef">long</span> t0 <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">nanoTime</span><span style="color:#f92672">();</span>
+              <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>parent <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                      c <span style="color:#f92672">=</span> parent<span style="color:#f92672">.</span><span style="color:#a6e22e">loadClass</span><span style="color:#f92672">(</span>name<span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
+                  <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+                      c <span style="color:#f92672">=</span> findBootstrapClassOrNull<span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+                  <span style="color:#f92672">}</span>
+              <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                  <span style="color:#75715e">// ClassNotFoundException thrown if class not found
+</span><span style="color:#75715e"></span>                  <span style="color:#75715e">// from the non-null parent class loader
+</span><span style="color:#75715e"></span>              <span style="color:#f92672">}</span>
+
+              <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>c <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                  <span style="color:#75715e">// If still not found, then invoke findClass in order
+</span><span style="color:#75715e"></span>                  <span style="color:#75715e">// to find the class.
+</span><span style="color:#75715e"></span>                  <span style="color:#66d9ef">long</span> t1 <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">nanoTime</span><span style="color:#f92672">();</span>
+                  c <span style="color:#f92672">=</span> findClass<span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+
+                  <span style="color:#75715e">// this is the defining class loader; record the stats
+</span><span style="color:#75715e"></span>                  sun<span style="color:#f92672">.</span><span style="color:#a6e22e">misc</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PerfCounter</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getParentDelegationTime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">addTime</span><span style="color:#f92672">(</span>t1 <span style="color:#f92672">-</span> t0<span style="color:#f92672">);</span>
+                  sun<span style="color:#f92672">.</span><span style="color:#a6e22e">misc</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PerfCounter</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getFindClassTime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">addElapsedTimeFrom</span><span style="color:#f92672">(</span>t1<span style="color:#f92672">);</span>
+                  sun<span style="color:#f92672">.</span><span style="color:#a6e22e">misc</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PerfCounter</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getFindClasses</span><span style="color:#f92672">().</span><span style="color:#a6e22e">increment</span><span style="color:#f92672">();</span>
+              <span style="color:#f92672">}</span>
+          <span style="color:#f92672">}</span>
+          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>resolve<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+              resolveClass<span style="color:#f92672">(</span>c<span style="color:#f92672">);</span>
+          <span style="color:#f92672">}</span>
+          <span style="color:#66d9ef">return</span> c<span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><p>该方法是类加载器的入口，负责根据给定的完全限定类名参数来加载类。JVM通过调用该方法并将 <em>resolve</em> 参数设置为 <em>true</em> 来解析类引用，但并不总是需要去解析类，若只是想确定类是否存在，则 <em>resolve</em> 参数设置为 <em>false</em> 即可。通过源码可知，加载类的默认顺序是：</p>
+<ol>
+<li>调用 <em>findLoadedClass(String)</em> 方法来查看该类是否已经加载</li>
+<li>在父类加载器上调用 <em>loadClass(String)</em> 方法</li>
+<li>调用 <em>findClass(String)</em> 方法来查找类</li>
+</ol>
+</li>
+<li>
+<p><strong>defineClass()方法</strong></p>
+<p>方法签名：<code>protected final Class&lt;?&gt; defineClass(String name, byte[] b, int off, int len) throws ClassFormatError</code>，该方法负责将字节数组转换成Class的实例，在使用该类之前，我们需要解析它。如果数据不包含有效的类，则会抛出 <em>ClassFormatError</em>。并且，该方法被标记为 <em>final</em>，因此无法被重写。</p>
+</li>
+<li>
+<p><strong>findClass()方法</strong></p>
+<p>该方法以完全限定类名作为参数来查找类，需要在遵循委托模式的自定义类加载器中重写此方法。另外，如果父级类加载器找不到所请求的类，则 <em>loadClass()</em> 方法将调动此方法。若类加载器的父级都没有找到该类，则会抛出默认实现的 <em>ClassNotFoundException</em>。</p>
+</li>
+<li>
+<p><strong>getParent()方法</strong></p>
+<p>方法签名：<code>public final ClassLoader getParent()</code>，该方法用于返回委托模式下的父级类加载器。</p>
+</li>
+<li>
+<p><strong>getResource()和findResource()方法</strong></p>
+<p>方法签名：<code>public URL getResource(String name)</code>，此方法尝试查找指定名称的资源，也同样遵循委托模式的工作机制。<em>findResource()方法</em> 会返回一个用于读取资源的URL对象，如果资源找不到或者调用者没有足够的权限返回资源，则返回 <em>null</em>。需要注意的是Java从类路径中寻找并加载资源，上述方法的参数对于类路径可以是相对或绝对的。</p>
+</li>
+</ul>
+<hr>
+<h3 id="context类加载器">Context类加载器</h3>
+<p>通常，context类加载器为J2SE中引入的类加载委派方案提供了一种替代方法。正如上文所述，JVM中的类加载器遵循层次模型，每个类加载器都有一个父类，但引导类加载器除外。但是，有时当JVM核心类需要动态加载由应用程序开发人员提供的类或资源时，我们可能会遇到问题。<br>
+例如，在JNDI中，核心功能是由rt.jar中的Bootstrap类来实现的，但是这些JNDI类可能会加载部署在应用程序类路径中的且由独立供应商实现的JNDI提供者。这个场景需要Bootstrap类加载器（父类加载器）加载之于Application加载器（子类加载器）可见的类。J2SE委托模式在这里不起作用（原因见上述特性三），为了解决这个问题，我们需要找到类加载的替代方法 &ndash; 可通过线程上下文装载器(thread context loader)来实现。<br>
+<em>java.lang.Thread</em> 类有一个方法 <em>getContextClassLoader()</em>，它返回特定线程的 <em>ContextClassLoader</em>，该 <em>ContextClassLoader</em> 由此线程的创建者在加载资源和类时提供。</p>
+<hr>
+<h3 id="小结">小结</h3>
+<p>本文于开始处，首先说明了类加载器对于执行Java程序的重要性。然后分别介绍了三种重要的内置类加载器，即Bootstrap，Extension和Application类加载器：Bootstrap充当所有这些类加载器的父代，负责加载JDK内部类；另一方面，Extension和Application类加载器分别从Java扩展目录和应用程序的类路径下加载类。接着，我们分析了类加载器的工作机制及其带来的重要特性代理，然后简要说明如何创建自定义加载器。在最后，介绍了Context类加载器及其应用的典型场景。</p>
+<hr>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#什么是类加载器">什么是类加载器</a></li>
+        <li><a href="#内置的类加载器">内置的类加载器</a></li>
+        <li><a href="#类加载器如何工作">类加载器如何工作</a></li>
+        <li><a href="#自定义类加载器">自定义类加载器</a></li>
+        <li><a href="#context类加载器">Context类加载器</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/development">development
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/java">java
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="/posts/2019-12-01-enable-custome-subdomain/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            配置自定义域名
+        </div>
+    </a>
+    
+    
+    <a href="/posts/2018-01-27-what-is-load-balancing/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">是什么系列之负载均衡&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shawztblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 Modx Blog
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-47043610-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin="anonymous"></script>
+        <script>renderMathInElement(document.body);</script>
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
