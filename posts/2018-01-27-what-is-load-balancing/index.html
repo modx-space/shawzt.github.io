@@ -1,79 +1,56 @@
-<!DOCTYPE html>
-<html>
+<!doctype html><html>
 <head>
-    <title>是什么系列之负载均衡 // Modx Blog</title>
-
-    <meta charset="utf-8">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    
-    
-    
-
-        <meta property="og:title" content="是什么系列之负载均衡" />
-    <meta property="og:description" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en" />
-    <meta property="og:url" content="https://shawzt.github.io/posts/2018-01-27-what-is-load-balancing/" />
-    
-
-    <link rel="shortcut icon" href="/favicon.ico">
-
-    <link href="https://shawzt.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://shawzt.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="https://shawzt.github.io/css/style.css">
-    
-
-    <meta name="generator" content="Hugo 0.80.0" />
+<title>是什么系列之负载均衡 // Modx Blog</title>
+<meta charset=utf-8>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta property="og:title" content="是什么系列之负载均衡">
+<meta property="og:description" content>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en">
+<meta property="og:url" content="https://shawzt.github.io/posts/2018-01-27-what-is-load-balancing/">
+<link rel="shortcut icon" href=/favicon.ico>
+<link href=https://shawzt.github.io/webfonts/ptserif/main.css rel=stylesheet type=text/css>
+<link href=https://shawzt.github.io/webfonts/source-code-pro/main.css rel=stylesheet type=text/css>
+<link rel=stylesheet href=https://shawzt.github.io/css/style.css>
+<meta name=generator content="Hugo 0.91.2">
 </head>
-
-
 <body>
-<div id="container">
-    <header id="header">
-    <div id="header-outer" class="outer">
-        <div id="header-inner" class="inner">
-            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://shawzt.github.io/">Modx Blog</a>
-            <nav id="main-nav">
-                
-                <a class="main-nav-link" href="/posts">文章</a>
-                
-                <a class="main-nav-link" href="/about">关于</a>
-                
-                <a class="main-nav-link" href="/tags">标签</a>
-                
-            </nav>
-            <nav id="sub-nav">
-                <div id="search-form-wrap">
-                </div>
-            </nav>
-        </div>
-    </div>
+<div id=container>
+<header id=header>
+<div id=header-outer class=outer>
+<div id=header-inner class=inner>
+<a id=main-nav-toggle class=nav-icon href=javascript:;></a>
+<a id=logo class=logo-text href=https://shawzt.github.io/>Modx Blog</a>
+<nav id=main-nav>
+<a class=main-nav-link href=/posts>文章</a>
+<a class=main-nav-link href=/about>关于</a>
+<a class=main-nav-link href=/tags>标签</a>
+</nav>
+<nav id=sub-nav>
+<div id=search-form-wrap>
+</div>
+</nav>
+</div>
+</div>
 </header>
-
-    <section id="main" class="outer">
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        <header class="article-header">
-            <h1 class="article-title" itemprop="name">是什么系列之负载均衡</h1>
-        </header>
-        
-        <div class="article-meta">
-            <a href="/posts/2018-01-27-what-is-load-balancing/" class="article-date">
-                <time datetime='2018-01-27T00:00:00.000&#43;00:00' itemprop="datePublished">2018-01-27</time>
-            </a>
-            
-            
-        </div>
-        <div class="article-entry" itemprop="articleBody">
-            <p><img src="/images/load-balancing.png" alt="load-balancing"></p>
-<h3 id="概要">概要</h3>
+<section id=main class=outer>
+<article class="article article-type-post" itemscope itemprop=blogPost>
+<div class=article-inner>
+<header class=article-header>
+<h1 class=article-title itemprop=name>是什么系列之负载均衡</h1>
+</header>
+<div class=article-meta>
+<a href=/posts/2018-01-27-what-is-load-balancing/ class=article-date>
+<time datetime=2018-01-27T00:00:00.000+00:00 itemprop=datePublished>2018-01-27</time>
+</a>
+</div>
+<div class=article-entry itemprop=articleBody>
+<p><img src=/images/load-balancing.png alt=load-balancing></p>
+<h3 id=概要>概要</h3>
 <p>对任何在线服务提供商而言，两个最重要的要求就是可用性和冗余性。一台服务器响应请求所花费的时间依据其当前的容量而变化。即使单个组件出现故障或被请求冲击，服务器会超负荷，客户和业务都会受到影响。</p>
 <p>负载均衡尝试通过在多个组件之间分担工作负荷去解决此问题。传入的请求可以从超负荷的服务器路由到具有更多可用资源的服务器。负载均衡具有从网络交换机到数据库服务器的多种应用程序。</p>
-<h3 id="负载均衡如何工作">负载均衡如何工作</h3>
+<h3 id=负载均衡如何工作>负载均衡如何工作</h3>
 <p>服务提供商通常通过使用面向Internet的前端服务器与后端服务器之间传递信息来构建其网络，这些前端服务器包含根据资源可用性将请求转发至某台后端服务器的负载均衡软件。负载均衡软件包含内部规则和逻辑来决定何时何处转发每个请求。</p>
 <p><strong>以下是负载均衡工作原理的简要介绍：</strong></p>
 <ol>
@@ -83,156 +60,91 @@
 <li>后端服务器返回响应给前端服务器，并由前端服务器转发给用户</li>
 </ol>
 <p>如果一切顺利，无论服务提供商的网络状况如何，用户都会及时收到响应。如果至少有一台前端服务器和至少一台后端服务器可用，则该用户的请求就可以被正确地处理。</p>
-<h3 id="负载均衡样例">负载均衡样例</h3>
+<h3 id=负载均衡样例>负载均衡样例</h3>
 <p>Google Compute Engine构建于被多种Google产品，如Gmail，Search和AdWords使用的相同的负载均衡技术之上。Compute Engine定期审查所有后端服务器的状态并根据它们当前的负载来标记是否健康。</p>
 <p>当用户连接至Google服务时，Compute Engine转发请求至一台健康的服务器。之后响应由这台健康的服务器并经过Compute Engine转发回给用户。与此同时，不健康的服务器将被修复，更换或下线。</p>
 <p>通过负载均衡，服务器可以在不影响终端用户体验时升级。Google和其他服务提供商通过升级后端服务器来推动应用程序更新。例如，当一台服务器进行离线升级时，其他服务器负责该工作负载，并随后依次进行更新。
 在Compute Engine中，将系统进行离线维护和升级的能力被称为“跛脚鸭模式”，这就是Google的Web产品即使在有效会话间也能无缝更新的方式。</p>
-<h3 id="负载均衡的好处">负载均衡的好处</h3>
+<h3 id=负载均衡的好处>负载均衡的好处</h3>
 <ol>
 <li>负载均衡使得系统管理员可以更加容易地处理传入请求，同时减少用户的等待时间</li>
 <li>用户体验更快，不间断的服务。用户不必等待一个状态差的服务器完成其之前的任务。相反，他们的请求会立即传递给更容易获得资源的服务器。</li>
 <li>服务提供商的停机时间更短，吞吐量更高。即使是服务器的整体故障，也不会影响终端用户的体验，因为负载平衡器将简单地将请求路由到一台健康的服务器。</li>
 <li>系统管理员遇到更少失败或高压力的组件。替代单个设备执行大量工作，负载平衡使用多个设备共同执行一些工作。</li>
 </ol>
-<h3 id="结论">结论</h3>
+<h3 id=结论>结论</h3>
 <p>对于我们多数人来说，我们依靠Web服务提供全天候(7x24)服务。30分钟停机时间可能会使得Facebook损失近60万美元。在处理高流量的Web应用程序时，负载平衡对于维护服务的完整性和可用性是至关重要。</p>
 <p>从DNS请求到Web服务器，负载均衡可能意味着成本高昂的停机时间和无缝的终端用户体验之间的差异。</p>
 <hr>
 <p>链接</p>
 <ul>
-<li><em>原文: <a href="https://blog.stackpath.com/glossary/load-balancing/">StackPath - What is Load Balancing?</a></em></li>
+<li><em>原文: <a href=https://blog.stackpath.com/glossary/load-balancing/>StackPath - What is Load Balancing?</a></em></li>
 </ul>
-
-        </div>
-
-        
-        
-        <div class="article-toc" >
-            <h3>Contents</h3>
-            <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#概要">概要</a></li>
-        <li><a href="#负载均衡如何工作">负载均衡如何工作</a></li>
-        <li><a href="#负载均衡样例">负载均衡样例</a></li>
-        <li><a href="#负载均衡的好处">负载均衡的好处</a></li>
-        <li><a href="#结论">结论</a></li>
-      </ul>
-    </li>
-  </ul>
+</div>
+<div class=article-toc>
+<h3>Contents</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#概要>概要</a></li>
+<li><a href=#负载均衡如何工作>负载均衡如何工作</a></li>
+<li><a href=#负载均衡样例>负载均衡样例</a></li>
+<li><a href=#负载均衡的好处>负载均衡的好处</a></li>
+<li><a href=#结论>结论</a></li>
+</ul>
+</li>
+</ul>
 </nav>
-        </div>
-        
-        
-
-        
-
-
-        
-        <footer class="article-footer">
-            <ul class="article-tag-list">
-                
-                <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/translation">translation
-                    </a>
-                </li>
-                
-                <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/development">development
-                    </a>
-                </li>
-                
-            </ul>
-        </footer>
-        
-    </div>
-    
-<nav id="article-nav">
-    
-    <a href="/posts/2018-06-05-class-loaders-in-java/" id="article-nav-newer" class="article-nav-link-wrap">
-        <div class="article-nav-title"><span>&lt;</span>&nbsp;
-            Java类加载器的一些事
-        </div>
-    </a>
-    
-    
-    <a href="/posts/2018-01-18-what-is-dns/" id="article-nav-older" class="article-nav-link-wrap">
-        <div class="article-nav-title">是什么系列之DNS&nbsp;<span>&gt;</span></div>
-    </a>
-    
-</nav>
-
-
-</article>
-
-        
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "shawztblog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        
-    </section>
-    <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2021 Modx Blog
-            <br />
-            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
-        </div>
-    </div>
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-47043610-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin="anonymous"></script>
-        <script>renderMathInElement(document.body);</script>
-    
-    <script>
-        document.getElementById('main-nav-toggle').addEventListener('click', function () {
-            var header = document.getElementById('header');
-            if (header.classList.contains('mobile-on')) {
-                header.classList.remove('mobile-on');
-            } else {
-                header.classList.add('mobile-on');
-            }
-        });
-    </script>
+</div>
+<footer class=article-footer>
+<ul class=article-tag-list>
+<li class=article-tag-list-item>
+<a class=article-tag-list-link href=https://shawzt.github.io//tags/translation>translation
+</a>
+</li>
+<li class=article-tag-list-item>
+<a class=article-tag-list-link href=https://shawzt.github.io//tags/development>development
+</a>
+</li>
+</ul>
 </footer>
-
+</div>
+<nav id=article-nav>
+<a href=/posts/2018-06-05-class-loaders-in-java/ id=article-nav-newer class=article-nav-link-wrap>
+<div class=article-nav-title><span>&lt;</span>&nbsp;
+Java类加载器的一些事
+</div>
+</a>
+<a href=/posts/2018-01-18-what-is-dns/ id=article-nav-older class=article-nav-link-wrap>
+<div class=article-nav-title>是什么系列之DNS&nbsp;<span>></span></div>
+</a>
+</nav>
+</article>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//shawztblog.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</section>
+<footer id=footer>
+<div class=outer>
+<div id=footer-info class=inner>
+&copy; 2022 Modx Blog
+<br>
+Powered by <a href=https://gohugo.io target=_blank>Hugo</a> with theme <a href=https://github.com/carsonip/hugo-theme-minos target=_blank>Minos</a>
+</div>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-47043610-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin=anonymous>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin=anonymous></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css integrity=sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0 crossorigin=anonymous>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js integrity=sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1 crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body)</script>
+<script>document.getElementById('main-nav-toggle').addEventListener('click',function(){var a=document.getElementById('header');a.classList.contains('mobile-on')?a.classList.remove('mobile-on'):a.classList.add('mobile-on')})</script>
+</footer>
 </div>
 </body>
 </html>

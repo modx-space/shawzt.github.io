@@ -1,100 +1,77 @@
-<!DOCTYPE html>
-<html>
+<!doctype html><html>
 <head>
-    <title>REST API行业讨论：OData vs GraphQL vs ORDS // Modx Blog</title>
-
-    <meta charset="utf-8">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    
-    
-    
-
-        <meta property="og:title" content="REST API行业讨论：OData vs GraphQL vs ORDS" />
-    <meta property="og:description" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en" />
-    <meta property="og:url" content="https://shawzt.github.io/posts/2018-01-05-rest-api-industry-debate-on-data-protocol/" />
-    
-
-    <link rel="shortcut icon" href="/favicon.ico">
-
-    <link href="https://shawzt.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://shawzt.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="https://shawzt.github.io/css/style.css">
-    
-
-    <meta name="generator" content="Hugo 0.80.0" />
+<title>REST API行业讨论：OData vs GraphQL vs ORDS // Modx Blog</title>
+<meta charset=utf-8>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta property="og:title" content="REST API行业讨论：OData vs GraphQL vs ORDS">
+<meta property="og:description" content>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en">
+<meta property="og:url" content="https://shawzt.github.io/posts/2018-01-05-rest-api-industry-debate-on-data-protocol/">
+<link rel="shortcut icon" href=/favicon.ico>
+<link href=https://shawzt.github.io/webfonts/ptserif/main.css rel=stylesheet type=text/css>
+<link href=https://shawzt.github.io/webfonts/source-code-pro/main.css rel=stylesheet type=text/css>
+<link rel=stylesheet href=https://shawzt.github.io/css/style.css>
+<meta name=generator content="Hugo 0.91.2">
 </head>
-
-
 <body>
-<div id="container">
-    <header id="header">
-    <div id="header-outer" class="outer">
-        <div id="header-inner" class="inner">
-            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://shawzt.github.io/">Modx Blog</a>
-            <nav id="main-nav">
-                
-                <a class="main-nav-link" href="/posts">文章</a>
-                
-                <a class="main-nav-link" href="/about">关于</a>
-                
-                <a class="main-nav-link" href="/tags">标签</a>
-                
-            </nav>
-            <nav id="sub-nav">
-                <div id="search-form-wrap">
-                </div>
-            </nav>
-        </div>
-    </div>
+<div id=container>
+<header id=header>
+<div id=header-outer class=outer>
+<div id=header-inner class=inner>
+<a id=main-nav-toggle class=nav-icon href=javascript:;></a>
+<a id=logo class=logo-text href=https://shawzt.github.io/>Modx Blog</a>
+<nav id=main-nav>
+<a class=main-nav-link href=/posts>文章</a>
+<a class=main-nav-link href=/about>关于</a>
+<a class=main-nav-link href=/tags>标签</a>
+</nav>
+<nav id=sub-nav>
+<div id=search-form-wrap>
+</div>
+</nav>
+</div>
+</div>
 </header>
-
-    <section id="main" class="outer">
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        <header class="article-header">
-            <h1 class="article-title" itemprop="name">REST API行业讨论：OData vs GraphQL vs ORDS</h1>
-        </header>
-        
-        <div class="article-meta">
-            <a href="/posts/2018-01-05-rest-api-industry-debate-on-data-protocol/" class="article-date">
-                <time datetime='2018-01-05T00:00:00.000&#43;00:00' itemprop="datePublished">2018-01-05</time>
-            </a>
-            
-            
-        </div>
-        <div class="article-entry" itemprop="articleBody">
-            <p>如何与REST API交互正在不断地发展。在这篇文章中，我们来看看一些处于Web服务技术前沿的标准。</p>
+<section id=main class=outer>
+<article class="article article-type-post" itemscope itemprop=blogPost>
+<div class=article-inner>
+<header class=article-header>
+<h1 class=article-title itemprop=name>REST API行业讨论：OData vs GraphQL vs ORDS</h1>
+</header>
+<div class=article-meta>
+<a href=/posts/2018-01-05-rest-api-industry-debate-on-data-protocol/ class=article-date>
+<time datetime=2018-01-05T00:00:00.000+00:00 itemprop=datePublished>2018-01-05</time>
+</a>
+</div>
+<div class=article-entry itemprop=articleBody>
+<p>如何与REST API交互正在不断地发展。在这篇文章中，我们来看看一些处于Web服务技术前沿的标准。</p>
 <p>Progress公司的高级软件工程师&ndash;Jeff Leinbach和开发者布道师&ndash;Saikrishna Teja Bobba，进行了这项研究，以帮助你决定在应用程序或数据分析管理工具中考虑采用哪种标准API。我们对比了OData，GraphQL和ORDS之间的差异，这些是用于通过Internet进行查询和更新数据的标准API和服务。关注点在于跨API的互通性，以进行分析、集成和数据管理。</p>
 <p>我们一直在基于业界活动，如AWS re:Invent，Oracle OpenWorld，Dreamforce，API World等众多的讨论来跟踪这些议题。Progress公司在数据访问标准，包括ODBC，JDBC，ADO.NET以及现在的OData(REST)的开发和贡献上也有丰富的经验，并且也是第一个加入OData技术委员会的成员。</p>
-<h3 id="什么是rest">什么是REST？</h3>
+<h3 id=什么是rest>什么是REST？</h3>
 <p>REST(representational state transfer)或者REST风格的Web服务是一种提供在Internet上计算机系统间互操作性的方式。符合REST的Web服务允许请求系统使用统一和预定义的一组无状态操作来访问和操控Web资源的文本表示。REST风格的实现使用诸如HTTP，URI，JSON和XML这些标准。</p>
 <p>请注意，REST是一种架构风格，而不是标准。</p>
-<h3 id="通过internet查询数据的标准api">通过Internet查询数据的标准API</h3>
+<h3 id=通过internet查询数据的标准api>通过Internet查询数据的标准API</h3>
 <ul>
 <li>
 <p>OData
-最初由Microsoft在2007年开发，<a href="http://www.odata.org/">OData</a>是OASIS标准的REST API并在Microsoft，SAP，CA，IBM和Salesforce等公司之间建立。它允许以简单和标准的方式来创建和使用可查询和可互通性的REST风格的API。OData为你提供了丰富的查询功能，且正在迅速地获得其开源途径的基础，以及出色的可扩展性。</p>
+最初由Microsoft在2007年开发，<a href=http://www.odata.org/>OData</a>是OASIS标准的REST API并在Microsoft，SAP，CA，IBM和Salesforce等公司之间建立。它允许以简单和标准的方式来创建和使用可查询和可互通性的REST风格的API。OData为你提供了丰富的查询功能，且正在迅速地获得其开源途径的基础，以及出色的可扩展性。</p>
 </li>
 <li>
 <p>GraphQL
-于2012年在Facebook内部开发，在2015年公开发布之前，<a href="http://graphql.org/">GraphQL</a>是在Facebook，Shopify和Intuit等公司部署的数据查询语言。GraphQL提供了一套对API中数据的完整且可理解的描述，使得客户端能够准确地询问它们需要什么，也使API的演变变得容易，并支持强大的开发工具。</p>
+于2012年在Facebook内部开发，在2015年公开发布之前，<a href=http://graphql.org/>GraphQL</a>是在Facebook，Shopify和Intuit等公司部署的数据查询语言。GraphQL提供了一套对API中数据的完整且可理解的描述，使得客户端能够准确地询问它们需要什么，也使API的演变变得容易，并支持强大的开发工具。</p>
 </li>
 <li>
 <p>ORDS
-<a href="http://www.oracle.com/technetwork/developer-tools/rest-data-services/overview/index.html">ORDS</a>(Oracle REST Data Services)是Oracle REST服务，为以Oracle为中心的应用程序提供类似的标准化。它使拥有SQL和其他数据库技能的开发人员能够构建企业级的面向Oracle数据库的数据访问API。Oracle数据库是当今现代，最先进应用程序开发人员所希望使用的，且实际上越来越多地需要使用它来构建应用程序。Oracle的60个小组使用ORDS，包括Oracle Database，Times Ten和NoSQL。</p>
+<a href=http://www.oracle.com/technetwork/developer-tools/rest-data-services/overview/index.html>ORDS</a>(Oracle REST Data Services)是Oracle REST服务，为以Oracle为中心的应用程序提供类似的标准化。它使拥有SQL和其他数据库技能的开发人员能够构建企业级的面向Oracle数据库的数据访问API。Oracle数据库是当今现代，最先进应用程序开发人员所希望使用的，且实际上越来越多地需要使用它来构建应用程序。Oracle的60个小组使用ORDS，包括Oracle Database，Times Ten和NoSQL。</p>
 </li>
 </ul>
-<h3 id="对比标准api">对比标准API</h3>
+<h3 id=对比标准api>对比标准API</h3>
 <ul>
 <li>
 <p>图表-1<br>
-<img src="/images/standard-apis-table-1.png" alt="standard-apis-table-1">
+<img src=/images/standard-apis-table-1.png alt=standard-apis-table-1>
 图表-1中对比标准API的准则是基于实现多个数据源之间的互操作性。</p>
 <ul>
 <li>有一点需要注意的是该比较表示规范的成熟。尽管GraphQL越来越流行，但围绕广泛采用的成熟度，最佳实践和工具的问题依然存在。</li>
@@ -103,14 +80,14 @@
 </li>
 <li>
 <p>图表-2<br>
-<img src="/images/standard-apis-table-2.png" alt="standard-apis-table-2">
+<img src=/images/standard-apis-table-2.png alt=standard-apis-table-2>
 在图表-2中，我们完成了关于其他一些标准的初步分析，并将在以后的文章中对这些领域进行扩展研究。</p>
 </li>
 </ul>
-<h3 id="标准查询功能">标准查询功能</h3>
+<h3 id=标准查询功能>标准查询功能</h3>
 <ul>
 <li>图表-3<br>
-<img src="/images/standard-apis-table-3.png" alt="standard-apis-table-3">
+<img src=/images/standard-apis-table-3.png alt=standard-apis-table-3>
 图表-3突出显示了通过开放标准接口访问数据的通用标准。
 <ul>
 <li>OData全面支持所有这些查询功能。你可以使用GraphQL和ORDS完成其中的一些操作，但它们并没有以一种标准化或者文档化的方式来实现互操作性。</li>
@@ -119,10 +96,10 @@
 </ul>
 </li>
 </ul>
-<h3 id="提取元数据">提取元数据</h3>
+<h3 id=提取元数据>提取元数据</h3>
 <ul>
 <li>图表-4<br>
-<img src="/images/standard-apis-table-4.png" alt="standard-apis-table-4"><br>
+<img src=/images/standard-apis-table-4.png alt=standard-apis-table-4><br>
 图表-4对比了提取元数据，这是分析和数据管理应用程序的核心，这些应用程序需要以可互操作的方式来对模式进行程序化逆向工程。
 <ul>
 <li>这些API都在努力解决这个问题。</li>
@@ -131,21 +108,21 @@
 </ul>
 </li>
 </ul>
-<h3 id="api版本化和维护">API版本化和维护</h3>
+<h3 id=api版本化和维护>API版本化和维护</h3>
 <p>令人头疼的一件事是在API变更时处理应用程序的更新，同时需要维护API的旧版本。</p>
 <ul>
 <li>对于REST API，导致这个的最大问题是，当你查询一个endpoint时，所有字段都会返回。API开发人员无法了解客户端是否依赖某些特定的字段，而客户端开发人员也必须处理返回的所有字段，即使是那些不需要的。</li>
 <li>GraphQL已经解决了API版本化和维护的问题，通过强制客户端准确地指定它们需要的字段。API开发人员可以主动与已知的字段消费者联系来迁移已弃用的字段。</li>
 <li>OData通过选择列表来提供类型的功能，以限制返回给应用程序所需要的字段数量。这减少了响应的大小和应用程序的处理时间，但是，它并没有提供一种机制来指示哪些字段已被弃用。OData更灵活，因为可以轻松地将查询写成返回所有字段，而且OData正在为规范添加模式版本来处理该问题。</li>
 </ul>
-<h3 id="样例">样例</h3>
+<h3 id=样例>样例</h3>
 <p>为了直观地说明使用这些API的差异，以下两段样例代码显示了如何在GraphQL和OData中执行“排序”。
-<img src="/images/graphql-code.png" alt="GraphQL-code"></p>
+<img src=/images/graphql-code.png alt=GraphQL-code></p>
 <p>在GraphQL的所有Opportunity函数的调用示例中，它的名字有点显而易见。但是，在GraphQL中没有任何可以告知你可以传入什么参数，以及参数值会如何影响函数的行为。这种行为在底层实现的基础上会有所不同。</p>
-<p><img src="/images/odata-code.png" alt="OData-code"><br>
+<p><img src=/images/odata-code.png alt=OData-code><br>
 相比之下，OData会准确地告知你在使用orderBy查询参数时它将如何运作，因为它的行为被定义为规范的一部分。</p>
-<h3 id="建议">建议</h3>
-<p><img src="/images/standard-apis-table-5.png" alt="standard-apis-table-5"><br>
+<h3 id=建议>建议</h3>
+<p><img src=/images/standard-apis-table-5.png alt=standard-apis-table-5><br>
 GraphQL更像是一种编程语言，这使得它非常灵活。它功能强大，但这意味着你的应用程序与特定的GraphQL服务实现耦合更紧密。没有办法一般地描述它是如何工作的。</p>
 <p>对那些习惯于处理Web服务的人来说，GraphQL也有些别扭，因为为了查询数据，你并不是执行GET操作&ndash;从一个通常REST Web服务获取数据的方式，而是执行POST请求，确切地定义你想要在响应中得到的内容，如字段和功能。</p>
 <p>因此，尽管GraphQL使你能够从元数据中确定哪些字段和功能是可用的，但你仍不一定知道它们在语义上的含义。</p>
@@ -155,136 +132,72 @@ GraphQL更像是一种编程语言，这使得它非常灵活。它功能强大�
 <hr>
 <p>链接</p>
 <ul>
-<li><em>原文: <a href="https://www.progress.com/blogs/rest-api-industry-debate-odata-vs-graphql-vs-ords">Progress Blog</a></em></li>
+<li><em>原文: <a href=https://www.progress.com/blogs/rest-api-industry-debate-odata-vs-graphql-vs-ords>Progress Blog</a></em></li>
 </ul>
-
-        </div>
-
-        
-        
-        <div class="article-toc" >
-            <h3>Contents</h3>
-            <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#什么是rest">什么是REST？</a></li>
-        <li><a href="#通过internet查询数据的标准api">通过Internet查询数据的标准API</a></li>
-        <li><a href="#对比标准api">对比标准API</a></li>
-        <li><a href="#标准查询功能">标准查询功能</a></li>
-        <li><a href="#提取元数据">提取元数据</a></li>
-        <li><a href="#api版本化和维护">API版本化和维护</a></li>
-        <li><a href="#样例">样例</a></li>
-        <li><a href="#建议">建议</a></li>
-      </ul>
-    </li>
-  </ul>
+</div>
+<div class=article-toc>
+<h3>Contents</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#什么是rest>什么是REST？</a></li>
+<li><a href=#通过internet查询数据的标准api>通过Internet查询数据的标准API</a></li>
+<li><a href=#对比标准api>对比标准API</a></li>
+<li><a href=#标准查询功能>标准查询功能</a></li>
+<li><a href=#提取元数据>提取元数据</a></li>
+<li><a href=#api版本化和维护>API版本化和维护</a></li>
+<li><a href=#样例>样例</a></li>
+<li><a href=#建议>建议</a></li>
+</ul>
+</li>
+</ul>
 </nav>
-        </div>
-        
-        
-
-        
-
-
-        
-        <footer class="article-footer">
-            <ul class="article-tag-list">
-                
-                <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/translation">translation
-                    </a>
-                </li>
-                
-            </ul>
-        </footer>
-        
-    </div>
-    
-<nav id="article-nav">
-    
-    <a href="/posts/2018-01-10-load-balancing/" id="article-nav-newer" class="article-nav-link-wrap">
-        <div class="article-nav-title"><span>&lt;</span>&nbsp;
-            聊一聊负载均衡(一)
-        </div>
-    </a>
-    
-    
-    <a href="/posts/2018-01-02-new-2018/" id="article-nav-older" class="article-nav-link-wrap">
-        <div class="article-nav-title">Bye 2017, New 2018&nbsp;<span>&gt;</span></div>
-    </a>
-    
-</nav>
-
-
-</article>
-
-        
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "shawztblog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        
-    </section>
-    <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2021 Modx Blog
-            <br />
-            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
-        </div>
-    </div>
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-47043610-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin="anonymous"></script>
-        <script>renderMathInElement(document.body);</script>
-    
-    <script>
-        document.getElementById('main-nav-toggle').addEventListener('click', function () {
-            var header = document.getElementById('header');
-            if (header.classList.contains('mobile-on')) {
-                header.classList.remove('mobile-on');
-            } else {
-                header.classList.add('mobile-on');
-            }
-        });
-    </script>
+</div>
+<footer class=article-footer>
+<ul class=article-tag-list>
+<li class=article-tag-list-item>
+<a class=article-tag-list-link href=https://shawzt.github.io//tags/translation>translation
+</a>
+</li>
+</ul>
 </footer>
-
+</div>
+<nav id=article-nav>
+<a href=/posts/2018-01-10-load-balancing/ id=article-nav-newer class=article-nav-link-wrap>
+<div class=article-nav-title><span>&lt;</span>&nbsp;
+聊一聊负载均衡(一)
+</div>
+</a>
+<a href=/posts/2018-01-02-new-2018/ id=article-nav-older class=article-nav-link-wrap>
+<div class=article-nav-title>Bye 2017, New 2018&nbsp;<span>></span></div>
+</a>
+</nav>
+</article>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//shawztblog.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</section>
+<footer id=footer>
+<div class=outer>
+<div id=footer-info class=inner>
+&copy; 2022 Modx Blog
+<br>
+Powered by <a href=https://gohugo.io target=_blank>Hugo</a> with theme <a href=https://github.com/carsonip/hugo-theme-minos target=_blank>Minos</a>
+</div>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-47043610-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin=anonymous>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin=anonymous></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css integrity=sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0 crossorigin=anonymous>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js integrity=sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1 crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body)</script>
+<script>document.getElementById('main-nav-toggle').addEventListener('click',function(){var a=document.getElementById('header');a.classList.contains('mobile-on')?a.classList.remove('mobile-on'):a.classList.add('mobile-on')})</script>
+</footer>
 </div>
 </body>
 </html>

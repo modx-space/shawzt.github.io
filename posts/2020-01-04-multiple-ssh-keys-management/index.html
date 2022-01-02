@@ -1,75 +1,52 @@
-<!DOCTYPE html>
-<html>
+<!doctype html><html>
 <head>
-    <title>为多个Github账号配置SSH keys // Modx Blog</title>
-
-    <meta charset="utf-8">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    
-    
-    
-
-        <meta property="og:title" content="为多个Github账号配置SSH keys" />
-    <meta property="og:description" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en" />
-    <meta property="og:url" content="https://shawzt.github.io/posts/2020-01-04-multiple-ssh-keys-management/" />
-    
-
-    <link rel="shortcut icon" href="/favicon.ico">
-
-    <link href="https://shawzt.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://shawzt.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="https://shawzt.github.io/css/style.css">
-    
-
-    <meta name="generator" content="Hugo 0.80.0" />
+<title>为多个Github账号配置SSH keys // Modx Blog</title>
+<meta charset=utf-8>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta property="og:title" content="为多个Github账号配置SSH keys">
+<meta property="og:description" content>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en">
+<meta property="og:url" content="https://shawzt.github.io/posts/2020-01-04-multiple-ssh-keys-management/">
+<link rel="shortcut icon" href=/favicon.ico>
+<link href=https://shawzt.github.io/webfonts/ptserif/main.css rel=stylesheet type=text/css>
+<link href=https://shawzt.github.io/webfonts/source-code-pro/main.css rel=stylesheet type=text/css>
+<link rel=stylesheet href=https://shawzt.github.io/css/style.css>
+<meta name=generator content="Hugo 0.91.2">
 </head>
-
-
 <body>
-<div id="container">
-    <header id="header">
-    <div id="header-outer" class="outer">
-        <div id="header-inner" class="inner">
-            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://shawzt.github.io/">Modx Blog</a>
-            <nav id="main-nav">
-                
-                <a class="main-nav-link" href="/posts">文章</a>
-                
-                <a class="main-nav-link" href="/about">关于</a>
-                
-                <a class="main-nav-link" href="/tags">标签</a>
-                
-            </nav>
-            <nav id="sub-nav">
-                <div id="search-form-wrap">
-                </div>
-            </nav>
-        </div>
-    </div>
+<div id=container>
+<header id=header>
+<div id=header-outer class=outer>
+<div id=header-inner class=inner>
+<a id=main-nav-toggle class=nav-icon href=javascript:;></a>
+<a id=logo class=logo-text href=https://shawzt.github.io/>Modx Blog</a>
+<nav id=main-nav>
+<a class=main-nav-link href=/posts>文章</a>
+<a class=main-nav-link href=/about>关于</a>
+<a class=main-nav-link href=/tags>标签</a>
+</nav>
+<nav id=sub-nav>
+<div id=search-form-wrap>
+</div>
+</nav>
+</div>
+</div>
 </header>
-
-    <section id="main" class="outer">
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        <header class="article-header">
-            <h1 class="article-title" itemprop="name">为多个Github账号配置SSH keys</h1>
-        </header>
-        
-        <div class="article-meta">
-            <a href="/posts/2020-01-04-multiple-ssh-keys-management/" class="article-date">
-                <time datetime='2020-01-04T00:00:00.000&#43;00:00' itemprop="datePublished">2020-01-04</time>
-            </a>
-            
-            
-        </div>
-        <div class="article-entry" itemprop="articleBody">
-            <h3 id="概要">概要</h3>
+<section id=main class=outer>
+<article class="article article-type-post" itemscope itemprop=blogPost>
+<div class=article-inner>
+<header class=article-header>
+<h1 class=article-title itemprop=name>为多个Github账号配置SSH keys</h1>
+</header>
+<div class=article-meta>
+<a href=/posts/2020-01-04-multiple-ssh-keys-management/ class=article-date>
+<time datetime=2020-01-04T00:00:00.000+00:00 itemprop=datePublished>2020-01-04</time>
+</a>
+</div>
+<div class=article-entry itemprop=articleBody>
+<h3 id=概要>概要</h3>
 <p>最近遇到一个需要在同一台Mac上配置多个SSH Key以访问Github上多个不同账号的问题，场景如下：</p>
 <ol>
 <li>公司项目托管在Github（https://github.com/）上，需要使用公司的邮箱注册账号并使用</li>
@@ -77,39 +54,39 @@
 </ol>
 <p>这样会遇到什么问题呢？<br>
 在未通过下述步骤配置时，当你在不同的项目间切换并尝试去更新代码时，将会遇到认证失败的提示。</p>
-<h3 id="方案">方案</h3>
-<h4 id="创建ssh-keys">创建SSH Keys</h4>
+<h3 id=方案>方案</h3>
+<h4 id=创建ssh-keys>创建SSH Keys</h4>
 <ol>
-<li>请参照<a href="https://help.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key">Github SSH Key帮助文档-1</a>来生成新SSH密钥</li>
+<li>请参照<a href=https://help.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key>Github SSH Key帮助文档-1</a>来生成新SSH密钥</li>
 <li>密钥文件的默认名是<code>id_rsa</code>，为更好的管理密钥，请分别命名如下：</li>
 </ol>
 <ul>
 <li>将公司账号（邮箱）对应生成的密钥文件命名为<code>id_rsa_work</code></li>
 <li>将个人账号（邮箱）对应生成的密钥文件命名为<code>id_rsa_personal</code></li>
 </ul>
-<h4 id="将ssh-keys添加到ssh-agent">将SSH Keys添加到ssh-agent</h4>
+<h4 id=将ssh-keys添加到ssh-agent>将SSH Keys添加到ssh-agent</h4>
 <ol>
-<li>请参照<a href="https://help.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent">Github SSH Key帮助文档-2</a>将上述创建的SSH密钥添加到ssh-agent</li>
+<li>请参照<a href=https://help.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent>Github SSH Key帮助文档-2</a>将上述创建的SSH密钥添加到ssh-agent</li>
 </ol>
 <ul>
-<li>启动ssh-agent：<code>eval &quot;$(ssh-agent -s)&quot;</code></li>
+<li>启动ssh-agent：<code>eval "$(ssh-agent -s)"</code></li>
 <li>添加公司账号对应的密钥：<code>ssh-add ~/.ssh/id_rsa_work</code></li>
 <li>添加个人账号对应的密钥：<code>ssh-add ~/.ssh/id_rsa_personal</code></li>
 </ul>
-<h4 id="将ssh-keys添加到github账号">将SSH Keys添加到Github账号</h4>
+<h4 id=将ssh-keys添加到github账号>将SSH Keys添加到Github账号</h4>
 <ol>
-<li>请参照<a href="https://help.github.com/cn/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account">Github SSH Key帮助文档-3</a>将上述创建的SSH密钥添加到Github账号</li>
+<li>请参照<a href=https://help.github.com/cn/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account>Github SSH Key帮助文档-3</a>将上述创建的SSH密钥添加到Github账号</li>
 </ol>
 <ul>
 <li>复制公司账号对应的密钥：<code>pbcopy &lt; ~/.ssh/id_rsa_work.pub</code></li>
 <li>复制个人账号对应的密钥：<code>pbcopy &lt; ~/.ssh/id_rsa_personal.pub</code></li>
 </ul>
-<h4 id="创建ssh配置文件">创建SSH配置文件</h4>
+<h4 id=创建ssh配置文件>创建SSH配置文件</h4>
 <p>现在我们在<code>~/.ssh</code>目录下创建一个配置文件来告诉git该使用哪个SSH密钥来访问指定的资源。</p>
 <ul>
 <li>检查或新建<code>~/.ssh/config</code>文件</li>
 </ul>
-<pre><code>// 新建
+<pre tabindex=0><code>// 新建
 touch ~/.ssh/config
 </code></pre><ul>
 <li>配置信息
@@ -118,18 +95,18 @@ touch ~/.ssh/config
 </ul>
 </li>
 </ul>
-<pre><code>Host me.github.com
+<pre tabindex=0><code>Host me.github.com
 HostName github.com
 PreferredAuthentications publickey
 IdentityFile ~/.ssh/id_rsa_personal
 </code></pre><ul>
 <li>任何使用<code>work.github.com</code>的git url将使用<code>id_rsa_work</code>密钥</li>
 </ul>
-<pre><code>Host work.github.com
+<pre tabindex=0><code>Host work.github.com
 HostName github.com
 PreferredAuthentications publickey
 IdentityFile ~/.ssh/id_rsa_work
-</code></pre><h4 id="克隆项目">克隆项目</h4>
+</code></pre><h4 id=克隆项目>克隆项目</h4>
 <ol>
 <li>Github个人项目的原生ssh clone url是：<code>git@github.com:shawzt/leetcode-java.git</code></li>
 <li>根据上述配置，请使用<code>me.github.com</code>替换<code>github.com</code></li>
@@ -137,128 +114,64 @@ IdentityFile ~/.ssh/id_rsa_work
 <li>同此，对于公司项目，请使用<code>work.github.com</code>替换<code>github.com</code></li>
 </ol>
 <hr>
-
-        </div>
-
-        
-        
-        <div class="article-toc" >
-            <h3>Contents</h3>
-            <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#概要">概要</a></li>
-        <li><a href="#方案">方案</a></li>
-      </ul>
-    </li>
-  </ul>
+</div>
+<div class=article-toc>
+<h3>Contents</h3>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#概要>概要</a></li>
+<li><a href=#方案>方案</a></li>
+</ul>
+</li>
+</ul>
 </nav>
-        </div>
-        
-        
-
-        
-
-
-        
-        <footer class="article-footer">
-            <ul class="article-tag-list">
-                
-                <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://shawzt.github.io//tags/development">development
-                    </a>
-                </li>
-                
-            </ul>
-        </footer>
-        
-    </div>
-    
-<nav id="article-nav">
-    
-    <a href="/posts/2021-01-17-software-architecture/" id="article-nav-newer" class="article-nav-link-wrap">
-        <div class="article-nav-title"><span>&lt;</span>&nbsp;
-            软件架构
-        </div>
-    </a>
-    
-    
-    <a href="/posts/2019-12-01-enable-custome-subdomain/" id="article-nav-older" class="article-nav-link-wrap">
-        <div class="article-nav-title">配置自定义域名&nbsp;<span>&gt;</span></div>
-    </a>
-    
-</nav>
-
-
-</article>
-
-        
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "shawztblog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        
-    </section>
-    <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2021 Modx Blog
-            <br />
-            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
-        </div>
-    </div>
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-47043610-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin="anonymous"></script>
-        <script>renderMathInElement(document.body);</script>
-    
-    <script>
-        document.getElementById('main-nav-toggle').addEventListener('click', function () {
-            var header = document.getElementById('header');
-            if (header.classList.contains('mobile-on')) {
-                header.classList.remove('mobile-on');
-            } else {
-                header.classList.add('mobile-on');
-            }
-        });
-    </script>
+</div>
+<footer class=article-footer>
+<ul class=article-tag-list>
+<li class=article-tag-list-item>
+<a class=article-tag-list-link href=https://shawzt.github.io//tags/development>development
+</a>
+</li>
+</ul>
 </footer>
-
+</div>
+<nav id=article-nav>
+<a href=/posts/2021-01-17-software-architecture/ id=article-nav-newer class=article-nav-link-wrap>
+<div class=article-nav-title><span>&lt;</span>&nbsp;
+软件架构
+</div>
+</a>
+<a href=/posts/2019-12-01-enable-custome-subdomain/ id=article-nav-older class=article-nav-link-wrap>
+<div class=article-nav-title>配置自定义域名&nbsp;<span>></span></div>
+</a>
+</nav>
+</article>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//shawztblog.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</section>
+<footer id=footer>
+<div class=outer>
+<div id=footer-info class=inner>
+&copy; 2022 Modx Blog
+<br>
+Powered by <a href=https://gohugo.io target=_blank>Hugo</a> with theme <a href=https://github.com/carsonip/hugo-theme-minos target=_blank>Minos</a>
+</div>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-47043610-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin=anonymous>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin=anonymous></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css integrity=sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0 crossorigin=anonymous>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js integrity=sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1 crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js integrity="sha256-ExtbCSBuYA7kq1Pz362ibde9nnsHYPt6JxuxYeZbU+c=" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body)</script>
+<script>document.getElementById('main-nav-toggle').addEventListener('click',function(){var a=document.getElementById('header');a.classList.contains('mobile-on')?a.classList.remove('mobile-on'):a.classList.add('mobile-on')})</script>
+</footer>
 </div>
 </body>
 </html>
